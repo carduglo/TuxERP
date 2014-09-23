@@ -68,21 +68,21 @@ class main:
         self.abas.tab(3, text="Estoque",underline="-1",)
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Aba Cadastro~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         #Referencia
-        Label(self.abas_pg0, text="Referencia",font=('Ariel','15')).place(relx=0.00,rely=0.01)
+        Label(self.abas_pg0, text=u"Referência",font=('Ariel','15')).place(relx=0.00,rely=0.01)
         self.ref_c = Entry(self.abas_pg0, width=20, font=('Ariel','20'))
         self.ref_c.place(relx=0.00,rely=0.07)
-        #Descrição
-        Label(self.abas_pg0, text="Descricao",font=('Ariel','15')).place(relx=0.4,rely=0.19)
-        self.desc_c = Entry(self.abas_pg0,font=('Ariel','30'))
-        self.desc_c.place(relx=0.25,rely=0.25,relwidth=0.45)
         #Preço varejo
-        Label(self.abas_pg0, text="Preco Varejo",font=('Ariel','15')).place(relx=0.425,rely=0.01)
+        Label(self.abas_pg0, text=u"Preço Varejo",font=('Ariel','15')).place(relx=0.408,rely=0.01)
         self.precov = Entry(self.abas_pg0, width=6, font=('Ariel','20'))
         self.precov.place(relx=0.4,rely=0.07,width=170)
         #Preço Atacado
-        Label(self.abas_pg0, text="Preco Atacado",font=('Ariel','15')).place(relx=0.755,rely=0.01)
+        Label(self.abas_pg0, text=u"Preço Atacado",font=('Ariel','15')).place(relx=0.755,rely=0.01)
         self.precoa = Entry(self.abas_pg0, width=6, font=('Ariel','20'))
         self.precoa.place(relx=0.75,rely=0.07,width=170)
+        #Descrição
+        Label(self.abas_pg0, text=u"Descrição",font=('Ariel','15')).place(relx=0.410,rely=0.19)
+        self.desc_c = Entry(self.abas_pg0,font=('Ariel','30'))
+        self.desc_c.place(relx=0.25,rely=0.25,relwidth=0.45)
         #Botão Cadastra
         self.botao_cadastra = Button(self.abas_pg0, text="Cadastrar", font=('Ariel','15'),
                                      fg='green',command=self.cadastra)
@@ -105,7 +105,7 @@ class main:
         self.separador0 = Frame(self.abas_pg1,bd=3,relief=SUNKEN,width=2)
         self.separador0.place(relx=0.10,rely=0.0,relheight=0.55)
 
-        Label(self.abas_pg1, text="PP",font=('Ariel','15'),fg='blue').place(relx=0.11,rely=0.00)
+        Label(self.abas_pg1, text=u"PP/Único",font=('Ariel','15'),fg='blue').place(relx=0.11,rely=0.00)
         self.pp_quant=Entry(self.abas_pg1, width=15, font=('Ariel','15'))
         self.pp_quant.place(relx=0.11,rely=0.04)
 
@@ -168,7 +168,7 @@ class main:
         Label(self.frame1,text='Cliente',font=('Ariel','15')).place(relx=0.02,rely=0.12)
         self.cliente=Entry(self.frame1,font=('Ariel','15'))
         self.cliente.place(relx=0.02,rely=0.16)
-        Label(self.frame1,text='Endereco',font=('Ariel','15')).place(relx=0.02,rely=0.21)
+        Label(self.frame1,text=u'Endereço',font=('Ariel','15')).place(relx=0.02,rely=0.21)
         self.endereco = Entry(self.frame1,font=('Ariel','15'))
         self.endereco.place(relx=0.02,rely=0.25,relwidth=0.94)
         Label(self.frame1,text='Cidade',font=('Ariel','15')).place(relx=0.02,rely=0.30)
@@ -220,7 +220,7 @@ class main:
         self.frame4 = Frame(self.abas_pg3)
         self.frame4.place(relx=0.0,rely=0.00,relheight=1.0,relwidth=1.0)
         
-        Label(self.frame4, text="PP",font=('Ariel','15'),fg='blue').place(relx=0.0,rely=0.00)
+        Label(self.frame4, text=u"PP/Único",font=('Ariel','15'),fg='blue').place(relx=0.0,rely=0.00)
         self.pp_estoque=Entry(self.frame4, width=15, font=('Ariel','15'))
         self.pp_estoque.place(relx=0.0,rely=0.04)
 
@@ -245,9 +245,17 @@ class main:
         self.ref_estoque.place(relx=0.7,rely=0.08)
                 
         #Cabeçalho da lista
-        self.dataCols = (u'Referência',u'Descrição','PP','P','M','G','GG')
+        self.dataCols = (u'Referência',u'Descrição',u'PP/Único','P','M','G','GG')
         self.arvore = ttk.Treeview(self.frame4,columns=self.dataCols, show='headings')
-        self.arvore.place(relx=0.0,rely=0.55,relheight=0.45,relwidth=1.0)
+        self.arvore.place(relx=0.0,rely=0.55,relheight=0.45,relwidth=0.990)
+        for c in self.dataCols:
+            self.arvore.heading(c, text = c)
+            self.arvore.column(c,minwidth=1,width=10)
+        self.rolagemy = Scrollbar(self.frame4)
+        self.rolagemy.place(relx=0.990,rely=0.550,relheight=0.45)
+        self.arvore.config(yscrollcommand=self.rolagemy.set)
+        self.rolagemy.config(command=self.arvore.yview)
+
         self.botao_alt_produto = Button(self.frame4,text='Alterar',font=('Arial','25'),command=self.alterar_produto)
         self.botao_alt_produto.place(relx=0.17,rely=0.012)
         self.botao_alt_produto = Button(self.frame4,text='Limpar',font=('Arial','25'),command=self.limpa_estoque)
@@ -256,7 +264,7 @@ class main:
         self.separador = Frame(self.frame4,bd=3,relief=SUNKEN,width=2)
         self.separador.place(relx=0.27,rely=0.0,relheight=0.55)
 
-        Label(self.frame4, text="PP",font=('Ariel','15'),fg='blue').place(relx=0.28,rely=0.00)
+        Label(self.frame4, text=u"PP/Único",font=('Ariel','15'),fg='blue').place(relx=0.28,rely=0.00)
         self.pp_soma=Entry(self.frame4, width=15, font=('Ariel','15'))
         self.pp_soma.place(relx=0.28,rely=0.04)
 
@@ -276,7 +284,8 @@ class main:
         self.gg_soma=Entry(self.frame4, width=15, font=('Ariel','15'))
         self.gg_soma.place(relx=0.28,rely=0.44)
 
-        self.botao_add = Button(self.frame4,text='Adicionar',font=('Arial','25'),command=self.somar_estoque)
+        self.botao_add = Button(self.frame4,text='Adicionar',font=('Arial','25'),
+                                command=self.somar_estoque)
         self.botao_add.place(relx=0.44,rely=0.012)
         
 #---------------------------------------Separador--------------------------------------------------------------------------
@@ -284,11 +293,14 @@ class main:
         self.separador2 = Frame(self.frame4,bd=3,relief=SUNKEN,width=2)
         self.separador2.place(relx=0.573,rely=0.0,relheight=0.55)
         
-        self.botao_pesq_produto = Button(self.frame4,text='Pesquisar',font=('Arial','25'),command=self.pesquisa_referencia)
+        self.botao_pesq_produto = Button(self.frame4,text='Pesquisar',font=('Arial','25'),
+                                         command=self.pesquisa_referencia)
         self.botao_pesq_produto.place(relx=0.7,rely=0.20)
-        for c in self.dataCols:
-            self.arvore.heading(c, text = c)
 
+        self.botao_del_produto = Button(self.frame4,text='Apagar',font=('Arial','25'),fg='red',
+                                        command=self.deleta_produto)
+        self.botao_del_produto.place(relx=0.88,rely=0.45)
+        
         self.lista_estoque()
         self.zera_soma()
         self.zera_pedido()
@@ -400,7 +412,7 @@ class main:
         self.mostra1.delete(0.0,END)
         consulta = cur.execute("SELECT * FROM clientes WHERE cl = '%s'" %self.consulta.get())
         for i in consulta:
-            self.mostra1.insert(END,'''Cliente: {}
+            self.mostra1.insert(END,u'''Cliente: {}
 End: {}
 Cidade: {}
 CEP: {}
@@ -412,10 +424,10 @@ Complemento: {}'''.format(i[1],i[2],i[3],i[4],i[5],i[6],i[7],i[8]))
     #Função Imprimir
     def imprimir(self):
         self.diminui_estoque()
-        '''outfile = open('outfile.txt','w')
-        cabecalho = ------------------------------------LINE FITNESS-------------------------------------
+        outfile = open('outfile.txt','w')
+        cabecalho = '''------------------------------------LINE FITNESS-------------------------------------
 ---------------------------E-mail: linefitness2014@gmail.com-------------------------
---------------------------------Fone: (47) 9682 6062---------------------------------
+--------------------------------Fone: (47) 9682 6062---------------------------------'''
         outfile.write(cabecalho+'\n\n\n')
         tb=self.listbox.get(0,END)        
         for i in tb: 
@@ -424,12 +436,12 @@ Complemento: {}'''.format(i[1],i[2],i[3],i[4],i[5],i[6],i[7],i[8]))
         totalprint = "Total do Pedido:" + 57*'-'+ str(self.totalp.get())
         outfile.write('\n\n'+totalprint)
         outfile.close()
-        subprocess.call(['notepad.exe','/p','outfile.txt']) #versão notepad windows
-        #subprocess.call(['swriter','outfile.txt']) #Linux writer'''
+        subprocess.call(['notepad.exe','/p','outfile.txt'])*2 #versão notepad windows
+        #subprocess.call(['swriter','outfile.txt']) #Linux writer
         
 #-------------------------------------Funções de Estoque----------------------------------------------------
     def lista_estoque(self):
-        #Limpa a lista    
+        #Limpar lista
         for i in self.arvore.get_children():
             self.arvore.delete(i)
         #Consulta BD e preenche a lista    
@@ -533,6 +545,12 @@ Complemento: {}'''.format(i[1],i[2],i[3],i[4],i[5],i[6],i[7],i[8]))
                    (SELECT produtos.gg-pedido.gg FROM pedido
                     WHERE produtos.ref = pedido.ref)
                     WHERE produtos.ref IN (SELECT pedido.ref FROM pedido)''')
+        con.commit()
+        self.lista_estoque()
+
+    def deleta_produto(self):
+        ref_del = self.ref_estoque.get()
+        cur.execute("DELETE FROM produtos WHERE ref=%s "%ref_del)
         con.commit()
         self.lista_estoque()
 
