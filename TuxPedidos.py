@@ -1,10 +1,11 @@
 # -*- coding: iso-8859-1 -*-
 import sqlite3
+from autocomplete import *
 import ttk
 from Tkinter import *
 import subprocess
 import tkMessageBox
-
+from datetime import date
 #Criar conexão e cursor
 con = sqlite3.connect('tuxdb.db')
 cur = con.cursor()
@@ -30,7 +31,7 @@ cur.execute('''CREATE TABLE IF NOT EXISTS produtos(
             m INTEGER DEFAULT (0),
             g INTEGER DEFAULT (0),
             gg INTEGER DEFAULT (0))''')
-con.commit()
+
 #Cria tabela do pedido
 cur.execute("""CREATE TABLE IF NOT EXISTS pedido (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -44,8 +45,23 @@ cur.execute("""CREATE TABLE IF NOT EXISTS pedido (
             m INTEGER DEFAULT (0),
             g INTEGER DEFAULT (0),
             gg INTEGER DEFAULT (0))""")
+
+cur.execute("""CREATE TABLE IF NOT EXISTS vendas (
+            data DATE,
+            ref INTEGER NOT NULL,
+            quant INTEGER NOT NULL,
+            desc VARCHAR(100) NOT NULL,
+            preco DEC NOT NULL,
+            total DEC NOT NULL,
+            pp INTEGER DEFAULT (0),
+            p INTEGER DEFAULT (0),
+            m INTEGER DEFAULT (0),
+            g INTEGER DEFAULT (0),
+            gg INTEGER DEFAULT (0))""")
+
 #Limpa a tabela pedido
 cur.execute("DELETE FROM pedido WHERE 1")
+con.commit()
 
 class main:
     def __init__(self,master):
@@ -152,13 +168,13 @@ class main:
         self.desconto = Entry(self.abas_pg1, width=6, font=('Ariel','20'))
         self.desconto.place(relx=0.0,rely=0.42)
         #ListBox
-        #scrollbar = Scrollbar(self.abas_pg1)
-        #scrollbar.place(x=1000,y=372,relheight=0.46)
+        scrollbar = Scrollbar(self.abas_pg1)
+        scrollbar.place(relx=0.99,rely=0.52,relheight=0.450)
         
         self.listbox = Listbox(self.abas_pg1,selectmode='single',font=('Courier','15'),fg="blue")
-        self.listbox.place(relx=0.0,rely=0.50,width=1000,height=350)
-        #self.listbox.config(yscrollcommand=scrollbar.set)        
-        #scrollbar.config(command=self.listbox.yview)
+        self.listbox.place(relx=0.0,rely=0.52,relwidth=0.987,relheight=0.450)
+        self.listbox.config(yscrollcommand=scrollbar.set)        
+        scrollbar.config(command=self.listbox.yview)
 #-------------------------------Aba Clientes-------------------------------------------------------------------------
         self.frame1 = Frame(self.abas_pg2)
         self.frame1.configure(relief=GROOVE)
@@ -200,15 +216,18 @@ class main:
         self.frame2.configure(relief=GROOVE)
         self.frame2.configure(borderwidth="2")
         self.frame2.place(relx=0.50,rely=0.0,relheight=0.31,relwidth=0.50)
+
         Label(self.frame2,text='CONSULTA',font=('Ariel','30')).place(relx=0.32,rely=0.05)
-        self.consulta= ttk.Combobox(self.frame2,font=("Ariel","15"))
-        self.consulta.place(relx=0.29,rely=0.47)
+        self.consulta= AutocompleteCombobox(self.frame2,font=("Ariel","15"))
         cur.execute("SELECT cl FROM clientes ORDER BY cl")
         self.col = cur.fetchall()
         self.col = [cli[0] for cli in self.col]
-        self.consulta["values"] = self.col
-        #self.consulta.set("Escolha")
+        self.consulta.set_completion_list(self.col)
+        #self.consulta["values"] = self.col
         self.consulta.bind("<<ComboboxSelected>>",self.mostraclientes)
+        self.consulta.bind("<Return>",self.mostraclientes)
+        self.consulta.bind("<KP_Enter>",self.mostraclientes)
+        self.consulta.place(relx=0.29,rely=0.47)
 
         self.frame3 = Frame(self.abas_pg2)
         self.frame3.configure(relief=GROOVE)
@@ -240,9 +259,7 @@ class main:
         self.gg_estoque=Entry(self.frame4, width=15, font=('Ariel','15'))
         self.gg_estoque.place(relx=0.0,rely=0.44)
 
-        Label(self.frame4, text=u"Referência",font=('Ariel','20'),fg='blue').place(relx=0.7,rely=0.00)
-        self.ref_estoque=Entry(self.frame4, width=15, font=('Ariel','20'))
-        self.ref_estoque.place(relx=0.7,rely=0.08)
+        
                 
         #Cabeçalho da lista
         self.dataCols = (u'Referência',u'Descrição',u'PP/Único','P','M','G','GG')
@@ -292,10 +309,17 @@ class main:
 
         self.separador2 = Frame(self.frame4,bd=3,relief=SUNKEN,width=2)
         self.separador2.place(relx=0.573,rely=0.0,relheight=0.55)
-        
-        self.botao_pesq_produto = Button(self.frame4,text='Pesquisar',font=('Arial','25'),
+
+        Label(self.frame4, text=u"Referência",font=('Ariel','18'),fg='blue').place(relx=0.58,rely=0.00)
+        self.ref_estoque=Entry(self.frame4, width=15, font=('Ariel','18'))
+        self.ref_estoque.place(relx=0.58,rely=0.07)
+
+        self.botao_pesq_produto = Button(self.frame4,text='Pesquisar',font=('Arial','20'),
                                          command=self.pesquisa_referencia)
-        self.botao_pesq_produto.place(relx=0.7,rely=0.20)
+        self.botao_pesq_produto.place(relx=0.85,rely=0.07)
+
+        Label(self.frame4, text=u"Descrição",font=('Ariel','18'),fg='blue').place(relx=0.58,rely=0.15)
+        self.lista_referencia()
 
         self.botao_del_produto = Button(self.frame4,text='Apagar',font=('Arial','25'),fg='red',
                                         command=self.deleta_produto)
@@ -313,14 +337,26 @@ class main:
         desc = self.desc_c.get()
         precov = self.precov.get()
         precoa = self.precoa.get()
-        qt = 0
-        try:
-            cur.execute("INSERT INTO produtos VALUES(?,?,?,?,?,?,?,?,?)",(ref,desc,precov,precoa,qt,qt,qt,qt,qt))
-        except:
-            tkMessageBox.showinfo('Aviso!',u'Referência já existente, ou valor inválido')
-        con.commit()
-        self.lista_estoque()
-        self.cancela_cadastro()
+        if ref == '':
+            tkMessageBox.showwarning('Aviso!',u'Você precisa preencher o campo referência')
+        elif desc == '':
+            tkMessageBox.showwarning('Aviso!',u'Você precisa preencher o campo descrição')
+        elif precov == '':
+            tkMessageBox.showwarning('Aviso!',u'Você precisa preencher o campo preço varejo')
+        elif precoa == '':
+            tkMessageBox.showwarning('Aviso!',u'Você precisa preencher o campo preço atacado')
+        else:
+            qt = 0
+            try:
+                cur.execute("INSERT INTO produtos VALUES(?,?,?,?,?,?,?,?,?)",(ref,desc,precov,precoa,qt,qt,qt,qt,qt))
+                self.cancela_cadastro()
+                tkMessageBox.showinfo('Aviso!',u'Produto cadastrado com sucesso')
+            except:
+                tkMessageBox.showinfo('Aviso!',u'Referência já existente, ou valor inválido')
+            con.commit()
+            self.lista_estoque()
+            self.lista_referencia()
+                        
 
     #Função Cancela cadastro
     def cancela_cadastro(self):
@@ -329,56 +365,79 @@ class main:
         self.precov.delete(0,END)
         self.precoa.delete(0,END)
 
-    #Função pedido
-    def pedido(self):
-        self.listbox.delete(0,END) #Limpa a listbox
-        ref = self.ref.get() #Pega o valor da referencia digitado
-        pp = float(self.pp_quant.get())
-        p = float(self.p_quant.get())
-        m = float(self.m_quant.get())
-        g = float(self.g_quant.get())
-        gg =float(self.gg_quant.get()) 
-        quant = pp+p+m+g+gg #Soma da quantidade de peças por tamanho
-        cur.execute("SELECT * FROM produtos WHERE ref = %s" %ref) #Consulta pela referencia
+    def lista_referencia(self):
+        self.consulta_ref= AutocompleteCombobox(self.frame4,font=("Ariel","18"))
+        cur.execute("SELECT desc FROM produtos ORDER BY desc")
+        self.col = cur.fetchall()
+        self.col = [cli[0] for cli in self.col]
+        self.consulta_ref.set_completion_list(self.col)
+        self.consulta_ref.bind("<<ComboboxSelected>>",self.consulta_referencia)
+        self.consulta_ref.bind("<Return>",self.consulta_referencia)
+        self.consulta_ref.bind("<KP_Enter>",self.mostraclientes)
+        self.consulta_ref.place(relx=0.58,rely=0.20)     
+
+    def consulta_referencia(self,event):
+        self.ref_estoque.delete(0,END)
+        desc_pesq = self.consulta_ref.get()
+        cur.execute('SELECT ref FROM produtos WHERE desc = "%s"' %desc_pesq)
         item = cur.fetchone()
-        desc= item[1]
-        preco = float(item[2])
-        precoa = float(item[3])
-        v = self.escolha.get()
-        if v == 1:
-            precof = preco
-        else:
-            precof = precoa
-        desconto = float(self.desconto.get())
-        total = quant*precof #Calcula preço total
-        desconto = total*desconto/100.00#Calculo do desconto em porcentagem
-        total = total-desconto
-        cur.execute("INSERT INTO pedido VALUES(?,?,?,?,?,?,?,?,?,?,?)",
-                    (None,ref,quant,desc,precof,total,pp,p,m,g,gg))
-        con.commit() #Insere dados na tabela pedido
-        tb=cur.execute("SELECT * FROM pedido") #Pesquisa tudo na tabela pedido
-        #Insere os dados na lista
-        self.listbox.insert(END,"Ref         Qtd                    Descricao                    Unit        Total")
-        tb = list(tb)
-        for i in tb: 
-            self.listbox.insert(END,"{:.<9}{:.^10}{:.^43}{:.^8.2f}{:.>12.2f}" .format(i[1],i[2],i[3],i[4],i[5]))#Insere dados na listbox
-            self.listbox.select_clear(self.listbox.size() - 2)
-            self.listbox.select_set(END)
-            self.listbox.yview(END)
-            cur.execute("SELECT SUM(total)FROM pedido")#Soma total
-            totalp = cur.fetchone()
-            self.totalp.delete(0,END) #Limpa Total
-            self.totalp.insert(END,"R$:%.2f"%totalp)#Insere total
-        self.zera_pedido()
+        self.ref_estoque.insert(END,item)
+        self.pesquisa_referencia()
         
-                  
-    #Função cancela pedido
+                
+    #Função pedido
+    def pedido(self):      
+        ref = self.ref.get() #Pega o valor da referencia digitado
+        if ref == '':
+            tkMessageBox.showwarning('Aviso!',u'Você precisa preencher o campo referência')
+        else:
+            pp = float(self.pp_quant.get())
+            p = float(self.p_quant.get())
+            m = float(self.m_quant.get())
+            g = float(self.g_quant.get())
+            gg =float(self.gg_quant.get()) 
+            quant = pp+p+m+g+gg #Soma da quantidade de peças por tamanho
+            cur.execute("SELECT * FROM produtos WHERE ref = %s" %ref) #Consulta pela referencia
+            item = cur.fetchone()
+            desc = item[1]
+            preco = float(item[2])
+            precoa = float(item[3])
+            v = self.escolha.get()
+            if v == 1:
+                precof = preco
+            else:
+                precof = precoa
+            desconto = float(self.desconto.get())
+            total = quant*precof #Calcula preço total
+            desconto = total*desconto/100.00#Calculo do desconto em porcentagem
+            total = total-desconto
+            cur.execute("INSERT INTO pedido VALUES(?,?,?,?,?,?,?,?,?,?,?)",
+                        (None,ref,quant,desc,precof,total,pp,p,m,g,gg))
+            con.commit() #Insere dados na tabela pedido
+            tb=cur.execute("SELECT * FROM pedido") #Pesquisa tudo na tabela pedido
+            self.listbox.delete(0,END) #Limpa a listbox
+            #Insere os dados na lista
+            self.listbox.insert(END,"Ref         Qtd                    Descricao                    Unit        Total")
+            tb = list(tb)
+            for i in tb: 
+                self.listbox.insert(END,u"{:.<9}{:.^10}{:.^43}{:.^8.2f}{:.>12.2f}" .format(i[1],i[2],i[3],i[4],i[5]))#Insere dados na listbox
+                self.listbox.select_clear(self.listbox.size() - 2)
+                self.listbox.select_set(END)
+                self.listbox.yview(END)
+                cur.execute("SELECT SUM(total)FROM pedido")#Soma total
+                totalp = cur.fetchone()
+                self.totalp.delete(0,END) #Limpa Total
+                self.totalp.insert(END,"R$:%.2f"%totalp)#Insere total
+                
+        
+
     def cancela(self):
         cur.execute("DELETE FROM pedido WHERE 1")#Apaga pedido
         self.listbox.delete(0,END) #Limpa a listbox
         self.ref.delete(0,END)#Apaga campo referencia
         self.totalp.delete(0,END)#Apaga campo Total do Pedido
         self.zera_desconto()
+        con.commit()
         
     def cadastraclientes(self):
         cliente=self.cliente.get()
@@ -389,14 +448,24 @@ class main:
         fone=self.fone.get()
         mail=self.mail.get()
         comp=self.comp.get(0.0,END)
-        cur.execute("INSERT INTO clientes VALUES(?,?,?,?,?,?,?,?,?)",
-                    (None,cliente,endereco,cidade,cep,cpf,fone,mail,comp))
-        con.commit()
-        self.limpaclientes()
-        cur.execute("SELECT cl FROM clientes ORDER BY cl")
-        self.col = cur.fetchall()
-        self.col = [cli[0] for cli in self.col]
-        self.consulta["values"] = self.col
+        if cliente == '':
+            tkMessageBox.showwarning('Aviso!',u'Você precisa preencher o campo cliente')
+        elif endereco == '':
+            tkMessageBox.showwarning('Aviso!',u'Você precisa preencher o campo endereço')
+        elif cidade == '':
+            tkMessageBox.showwarning('Aviso!',u'Você precisa preencher o campo cidade')
+        elif fone == '':
+            tkMessageBox.showwarning('Aviso!',u'Você precisa preencher o campo telefone')
+        else:
+            cur.execute("INSERT INTO clientes VALUES(?,?,?,?,?,?,?,?,?)",
+                        (None,cliente,endereco,cidade,cep,cpf,fone,mail,comp))
+            con.commit()
+            self.limpaclientes()
+            tkMessageBox.showinfo('Aviso!',u'Cliente cadastrado com sucesso')
+            cur.execute("SELECT cl FROM clientes ORDER BY cl")
+            self.col = cur.fetchall()
+            self.col = [cli[0] for cli in self.col]
+            self.consulta["values"] = self.col
 
     def limpaclientes(self):
         self.cliente.delete(0,END)
@@ -424,6 +493,7 @@ Complemento: {}'''.format(i[1],i[2],i[3],i[4],i[5],i[6],i[7],i[8]))
     #Função Imprimir
     def imprimir(self):
         self.diminui_estoque()
+        self.cadastra_venda()
         outfile = open('outfile.txt','w')
         cabecalho = '''------------------------------------LINE FITNESS-------------------------------------
 ---------------------------E-mail: linefitness2014@gmail.com-------------------------
@@ -439,6 +509,7 @@ Complemento: {}'''.format(i[1],i[2],i[3],i[4],i[5],i[6],i[7],i[8]))
         subprocess.call(['notepad.exe','/p','outfile.txt'])*2 #versão notepad windows
         #subprocess.call(['swriter','outfile.txt']) #Linux writer
         
+        
 #-------------------------------------Funções de Estoque----------------------------------------------------
     def lista_estoque(self):
         #Limpar lista
@@ -452,16 +523,19 @@ Complemento: {}'''.format(i[1],i[2],i[3],i[4],i[5],i[6],i[7],i[8]))
 
     def itemselect(self,event):
         self.ref_estoque.delete(0,END)
+        self.consulta_ref.delete(0,END)
         self.limpa_estoque()       
         item = self.arvore.selection()
         item = self.arvore.item(item,'values')
-        #Preenche os campos
+        #Preenche os campos        
         self.ref_estoque.insert(END,item[0])
+        self.consulta_ref.insert(END,item[1])
         self.pp_estoque.insert(END,item[2])
         self.p_estoque.insert(END,item[3])
         self.m_estoque.insert(END,item[4])
         self.g_estoque.insert(END,item[5])
         self.gg_estoque.insert(END,item[6])
+               
 
     def limpa_estoque(self):
         #Limpa os campos
@@ -490,15 +564,18 @@ Complemento: {}'''.format(i[1],i[2],i[3],i[4],i[5],i[6],i[7],i[8]))
 
     def pesquisa_referencia(self):
         ref_pesq = self.ref_estoque.get()
-        cur.execute('SELECT * FROM produtos WHERE ref = %s'%ref_pesq)
-        item = cur.fetchone()
-        self.limpa_estoque()
-        self.pp_estoque.insert(END,item[4])
-        self.p_estoque.insert(END,item[5])
-        self.m_estoque.insert(END,item[6])
-        self.g_estoque.insert(END,item[7])
-        self.gg_estoque.insert(END,item[8])
-        self.lista_estoque()
+        try:
+            cur.execute('SELECT * FROM produtos WHERE ref = %s'%ref_pesq)
+            item = cur.fetchone()
+            self.limpa_estoque()
+            self.pp_estoque.insert(END,item[4])
+            self.p_estoque.insert(END,item[5])
+            self.m_estoque.insert(END,item[6])
+            self.g_estoque.insert(END,item[7])
+            self.gg_estoque.insert(END,item[8])       
+            self.lista_estoque()
+        except:
+            tkMessageBox.showinfo('Aviso!',u'Referência inválida')
        
     def somar_estoque(self):
         indice = self.ref_estoque.get()
@@ -548,6 +625,18 @@ Complemento: {}'''.format(i[1],i[2],i[3],i[4],i[5],i[6],i[7],i[8]))
         con.commit()
         self.lista_estoque()
 
+    def cadastra_venda(self):
+        hoje = date.today()
+        hoje = hoje.strftime('%d-%m-%Y')
+        cur.execute("SELECT * FROM pedido")
+        pedido=cur.fetchall()
+        #print pedido
+        for i in pedido:
+            cur.execute("INSERT INTO vendas VALUES(?,?,?,?,?,?,?,?,?,?,?)",
+                        (hoje,i[1],i[2],i[3],i[4],i[5],i[6],
+                         i[7],i[8],i[9],i[10]))
+        con.commit() 
+
     def deleta_produto(self):
         ref_del = self.ref_estoque.get()
         cur.execute("DELETE FROM produtos WHERE ref=%s "%ref_del)
@@ -580,15 +669,18 @@ Complemento: {}'''.format(i[1],i[2],i[3],i[4],i[5],i[6],i[7],i[8]))
     def zera_desconto(self):
         self.desconto.delete(0,END)
         self.desconto.insert(0,'0')
-                          
-        
+
 root = Tk()
 root.title("TuxPedidos 1.0")
 root.geometry("1366x768")
-img = PhotoImage(file='tuxd.png')
-root.tk.call('wm','iconphoto',root._w,img)
+#img = PhotoImage(file='tuxd.png')
+#root.tk.call('wm','iconphoto',root._w,img)
 main(root)
-root.mainloop()
+senha = input('Digite sua senha:')
+if senha == 123:
+    root.mainloop()
+else:
+    exit
 
 
         
