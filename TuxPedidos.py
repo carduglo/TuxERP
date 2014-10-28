@@ -388,7 +388,7 @@ class main:
     #Função pedido
     def pedido(self):      
         ref = self.ref.get() #Pega o valor da referencia digitado
-        if ref == '':
+        if ref == '': # Checa se campo referência está preenchido
             tkMessageBox.showwarning('Aviso!',u'Você precisa preencher o campo referência')
         else:
             pp = float(self.pp_quant.get())
@@ -410,24 +410,35 @@ class main:
             desconto = float(self.desconto.get())
             total = quant*precof #Calcula preço total
             desconto = total*desconto/100.00#Calculo do desconto em porcentagem
-            total = total-desconto
-            cur.execute("INSERT INTO pedido VALUES(?,?,?,?,?,?,?,?,?,?,?)",
-                        (None,ref,quant,desc,precof,total,pp,p,m,g,gg))
-            con.commit() #Insere dados na tabela pedido
-            tb=cur.execute("SELECT * FROM pedido") #Pesquisa tudo na tabela pedido
-            self.listbox.delete(0,END) #Limpa a listbox
-            #Insere os dados na lista
-            self.listbox.insert(END,"Ref         Qtd                    Descricao                    Unit        Total")
-            tb = list(tb)
-            for i in tb: 
-                self.listbox.insert(END,u"{:.<9}{:.^10}{:.^43}{:.^8.2f}{:.>12.2f}" .format(i[1],i[2],i[3],i[4],i[5]))#Insere dados na listbox
-                self.listbox.select_clear(self.listbox.size() - 2)
-                self.listbox.select_set(END)
-                self.listbox.yview(END)
-                cur.execute("SELECT SUM(total)FROM pedido")#Soma total
-                totalp = cur.fetchone()
-                self.totalp.delete(0,END) #Limpa Total
-                self.totalp.insert(END,"R$:%.2f"%totalp)#Insere total
+            total = total-desconto #Aplica desconto
+            if pp > 0 and item[4] <= 0: #Checa se há itens em estoque
+                tkMessageBox.showwarning('Aviso!',u'Não há {} tamanho PP em estoque' .format(desc))
+            elif p > 0 and item[5] <= 0:
+                tkMessageBox.showwarning('Aviso!',u'Não há {} tamanho P em estoque' .format(desc))
+            elif m > 0 and item[6] <= 0:
+                tkMessageBox.showwarning('Aviso!',u'Não há {} tamanho M em estoque' .format(desc))
+            elif g > 0 and item[7] <= 0:
+                tkMessageBox.showwarning('Aviso!',u'Não há {} tamanho G em estoque' .format(desc))
+            elif gg > 0 and item[8] <= 0:
+                tkMessageBox.showwarning('Aviso!',u'Não há {} tamanho GG em estoque' .format(desc))
+            else:
+                cur.execute("INSERT INTO pedido VALUES(?,?,?,?,?,?,?,?,?,?,?)",
+                            (None,ref,quant,desc,precof,total,pp,p,m,g,gg)) # Insere dados na table pedido
+                con.commit() #Insere dados na tabela pedido
+                tb=cur.execute("SELECT * FROM pedido") #Pesquisa tudo na tabela pedido
+                self.listbox.delete(0,END) #Limpa a listbox
+                #Insere os dados na lista
+                self.listbox.insert(END,"Ref         Qtd                    Descricao                    Unit        Total")
+                tb = list(tb)
+                for i in tb: 
+                    self.listbox.insert(END,u"{:.<9}{:.^10}{:.^43}{:.^8.2f}{:.>12.2f}" .format(i[1],i[2],i[3],i[4],i[5]))#Insere dados na listbox
+                    self.listbox.select_clear(self.listbox.size() - 2)
+                    self.listbox.select_set(END)
+                    self.listbox.yview(END)
+                    cur.execute("SELECT SUM(total)FROM pedido")#Soma total
+                    totalp = cur.fetchone()
+                    self.totalp.delete(0,END) #Limpa Total
+                    self.totalp.insert(END,"R$:%.2f"%totalp)#Insere total
                 
         
 
