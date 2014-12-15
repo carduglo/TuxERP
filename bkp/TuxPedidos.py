@@ -28,97 +28,97 @@ cur = con.cursor()
 cur.execute("DELETE FROM pedido WHERE 1")#Limpa tabela pedido
 
 class main:
-    def __init__(self, master):
+    def __init__(self,master):
         #Tela de login
-        self.l1 = Label(master,text = u'Usuário', font = ('Arial','30'))
-        self.l1.place(relx = 0.42, rely = 0.07)
-        self.entra_usuario = Entry(master, font = ('Arial','30'))
+        self.l1 = Label(master,text=u'Usuário',font=('Arial','30'))
+        self.l1.place(relx=0.4,rely=0.07)
+        self.entra_usuario = Entry(master,font=('Arial','30'))
         self.entra_usuario.place(relx = 0.3, rely = 0.15)
-        self.l2 = Label(master, text = 'Senha', font = ('Arial','30'))
-        self.l2.place(relx = 0.42, rely = 0.42)
-        self.entrasenha = Entry(master,font = ('Arial', '30'), show = '*')
-        self.entrasenha.bind("<Return>", self.autentica2)
-        self.entrasenha.bind("<KP_Enter>", self.autentica2)
-        self.entrasenha.place(relx = 0.3, rely = 0.50)
-        self.botao_login = Button(master, text = 'Login', font = ('Arial','30'),
-                                command = self.autentica)
-        self.botao_login.place(relx = 0.425, rely = 0.75)
+        self.l2 = Label(master,text='Senha',font=('Arial','30'))
+        self.l2.place(relx=0.4,rely=0.42)
+        self.entrasenha = Entry(master,font=('Arial','30'),show='*')
+        self.entrasenha.bind("<Return>",self.autentica2)
+        self.entrasenha.bind("<KP_Enter>",self.autentica2)
+        self.entrasenha.place(relx=0.3,rely=0.50)
+        self.botao_login = Button(master, text='Login',font=('Arial','30'),
+                                command=self.autentica)
+        self.botao_login.place(relx=0.4,rely=0.75)
 
         # Fonte default
-        f = tkFont.Font(family = 'helvetica', size = 14)
+        f = tkFont.Font(family='helvetica', size=14)
         s = ttk.Style()
-        s.configure('.', font = f)
+        s.configure('.', font=f)
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Tela Principal~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         
         self.abas = ttk.Notebook(master)
         #self.abas.configure(width=1024) Ainda não descobri pra que serve isso
-        self.abas.configure(takefocus = "")
+        self.abas.configure(takefocus="")
         self.abas_pg0 = ttk.Frame(self.abas)
-        self.abas.add(self.abas_pg0, padding = 3)
-        self.abas.tab(0, text = "Cadastro", underline = "-1")
+        self.abas.add(self.abas_pg0, padding=3)
+        self.abas.tab(0, text="Cadastro",underline="-1")
         self.abas_pg3 = ttk.Frame(self.abas)
-        self.abas.add(self.abas_pg3, padding = 3)
-        self.abas.tab(1, text = "Estoque", underline = "-1",)
+        self.abas.add(self.abas_pg3, padding=3)
+        self.abas.tab(1, text="Estoque",underline="-1",)
         self.abas_pg2 = ttk.Frame(self.abas)
-        self.abas.add(self.abas_pg2, padding = 3)
-        self.abas.tab(2, text = "Clientes", underline = "-1",)
+        self.abas.add(self.abas_pg2, padding=3)
+        self.abas.tab(2, text="Clientes",underline="-1",)
         self.abas_pg1 = ttk.Frame(self.abas)
-        self.abas.add(self.abas_pg1, padding = 3)
-        self.abas.tab(3, text = "Venda", underline = "-1",)
+        self.abas.add(self.abas_pg1, padding=3)
+        self.abas.tab(3, text="Venda",underline="-1",)
         self.abas_pg4 = ttk.Frame(self.abas)
-        self.abas.add(self.abas_pg4, padding = 3)
-        self.abas.tab(4, text = u"Relatórios", underline = "-1",)        
+        self.abas.add(self.abas_pg4, padding=3)
+        self.abas.tab(4, text=u"Relatórios",underline="-1",)        
         
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Aba Cadastro~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        self.label1 = Label(self.abas_pg0, text = u"CADASTRO DE PRODUTO", font = ('Ariel','25'), fg = 'blue')
+        self.label1 = Label(self.abas_pg0, text=u"CADASTRO DE PRODUTO",font=('Ariel','25'),fg='blue')
         #Referencia
-        self.label2 = Label(self.abas_pg0, text = u"Referência", font = ('Ariel','15'))
-        self.ref_c = Entry(self.abas_pg0, width = 20, font = ('Ariel','20'))        
+        self.label2 = Label(self.abas_pg0, text=u"Referência",font=('Ariel','15'))
+        self.ref_c = Entry(self.abas_pg0, width=20, font=('Ariel','20'))        
         #Preço varejo
-        self.label3 = Label(self.abas_pg0, text = u"Preço Varejo", font = ('Ariel','15'))
-        self.precov = Entry(self.abas_pg0, width = 6, font = ('Ariel','20'))        
+        self.label3 = Label(self.abas_pg0, text=u"Preço Varejo",font=('Ariel','15'))
+        self.precov = Entry(self.abas_pg0, width=6, font=('Ariel','20'))        
         #Preço Atacado
-        self.label4 = Label(self.abas_pg0, text = u"Preço Atacado",font = ('Ariel','15'))
-        self.precoa = Entry(self.abas_pg0, width = 6, font = ('Ariel','20'))        
+        self.label4 = Label(self.abas_pg0, text=u"Preço Atacado",font=('Ariel','15'))
+        self.precoa = Entry(self.abas_pg0, width=6, font=('Ariel','20'))        
         #Descrição
-        self.label5 = Label(self.abas_pg0, text = u"Descrição", font = ('Ariel','15'))
-        self.desc_c = Entry(self.abas_pg0, font = ('Ariel','30'))        
+        self.label5 = Label(self.abas_pg0, text=u"Descrição",font=('Ariel','15'))
+        self.desc_c = Entry(self.abas_pg0,font=('Ariel','30'))        
         #Botão Cadastra
-        self.botao_cadastra = Button(self.abas_pg0, text = "Cadastrar", font = ('Ariel','18'),
-                                     fg = 'green', command = self.cadastra)        
+        self.botao_cadastra = Button(self.abas_pg0, text="Cadastrar", font=('Ariel','18'),
+                                     fg='green',command=self.cadastra)        
         #Botao Cancela cadastro
-        self.botao_cancela = Button(self.abas_pg0, text = "Novo/Cancelar",
-                             font = ('Ariel','15'), fg = 'red', command = self.cancela_cadastro)        
+        self.botao_cancela = Button(self.abas_pg0, text="Novo/Cancelar",
+                             font=('Ariel','15'),fg='red',command=self.cancela_cadastro)        
 
-        self.sep_cadastro = Frame(self.abas_pg0, bd = 3, relief = SUNKEN, height = 2)
+        self.sep_cadastro = Frame(self.abas_pg0,bd=3,relief=SUNKEN,height=2)
         
         #Cadastra Vendedor
-        self.label6 = Label(self.abas_pg0, text = u"CADASTRO DE VENDEDORES", font = ('Ariel','25'), fg = 'blue')
+        self.label6 = Label(self.abas_pg0, text=u"CADASTRO DE VENDEDORES",font=('Ariel','25'),fg='blue')
         #Entrada cadastra vendedor
-        self.label7 = Label(self.abas_pg0, text = u"Vendedor", font = ('Ariel','15'))
-        self.vend_c = Entry(self.abas_pg0, width = 20, font = ('Ariel','20'))
+        self.label7 = Label(self.abas_pg0, text=u"Vendedor",font=('Ariel','15'))
+        self.vend_c = Entry(self.abas_pg0, width=20, font=('Ariel','20'))
         
         #Entrada cadastra senha vendedor
-        self.label8 = Label(self.abas_pg0, text = u"Senha", font = ('Ariel','15'))
-        self.senha_c = Entry(self.abas_pg0, width = 20, font = ('Ariel','20'), show = '*')
+        self.label8 = Label(self.abas_pg0, text=u"Senha",font=('Ariel','15'))
+        self.senha_c = Entry(self.abas_pg0, width=20, font=('Ariel','20'),show='*')
         
         #Botão cadastra vendedor
-        self.b_cadastra_vendedor = Button(self.abas_pg0, text = "Cadastrar",
-               font = ('Ariel','15'), fg = 'green', command = self.cadastra_vendedor)
+        self.b_cadastra_vendedor = Button(self.abas_pg0, text="Cadastrar",
+               font=('Ariel','15'),fg='green',command=self.cadastra_vendedor)
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Aba Venda~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         #Entrada vendedor
-        self.label9 = Label(self.abas_pg1, text = u"Vendedor", font = ('Ariel','15'))
+        self.label9 = Label(self.abas_pg1, text=u"Vendedor",font=('Ariel','15'))
         self.lista_vendedores()
         #Entrada cliente
-        self.label10 = Label(self.abas_pg1,text = 'Cliente', font = ('Ariel','15'))
-        self.venda_cliente = AutocompleteCombobox(self.abas_pg1, font = ("Ariel","18"), width = 7)
+        self.label10 = Label(self.abas_pg1,text='Cliente',font=('Ariel','15'))
+        self.venda_cliente = AutocompleteCombobox(self.abas_pg1, font=("Ariel","18"),width=7)
 
         
         #Entrada referencia
-        self.label11 = Label(self.abas_pg1, text = u"Referência", font = ('Ariel','15'))
-        self.ref = Entry(self.abas_pg1, width = 6, font = ('Ariel','20'))
+        self.label11 = Label(self.abas_pg1, text=u"Referência",font=('Ariel','15'))
+        self.ref = Entry(self.abas_pg1, width=6, font=('Ariel','20'))
         
         #Entrada quantidade
         #Label(self.abas_pg1, text="Quantidade",font=('Ariel','15')).place(relx=-0.0,rely=0.2)
@@ -126,315 +126,315 @@ class main:
         #self.quant.place(relx=0.00,rely=0.25)
 
 #-------------------------------------------Separador----------------------------------------------------------------------
-        self.separador0 = Frame(self.abas_pg1, bd = 3, relief = SUNKEN, width = 2)        
+        self.separador0 = Frame(self.abas_pg1,bd=3,relief=SUNKEN,width=2)        
 
-        self.label12 = Label(self.abas_pg1, text = u"PP/Único", font = ('Ariel','15'), fg = 'blue')
-        self.pp_quant = Entry(self.abas_pg1, width = 15, font = ('Ariel','15'))        
+        self.label12 = Label(self.abas_pg1, text=u"PP/Único",font=('Ariel','15'),fg='blue')
+        self.pp_quant=Entry(self.abas_pg1, width=15, font=('Ariel','15'))        
 
-        self.label13 = Label(self.abas_pg1, text = "P", font = ('Ariel','15'), fg = 'blue')
-        self.p_quant = Entry(self.abas_pg1, width = 15, font = ('Ariel','15'))        
+        self.label13 = Label(self.abas_pg1, text="P",font=('Ariel','15'),fg='blue')
+        self.p_quant=Entry(self.abas_pg1, width=15, font=('Ariel','15'))        
 
-        self.label14 = Label(self.abas_pg1, text = "M", font = ('Ariel','15'), fg = 'blue')
-        self.m_quant = Entry(self.abas_pg1, width = 15, font = ('Ariel','15'))        
+        self.label14 = Label(self.abas_pg1, text="M",font=('Ariel','15'),fg='blue')
+        self.m_quant=Entry(self.abas_pg1, width=15, font=('Ariel','15'))        
 
-        self.label15 = Label(self.abas_pg1, text = "G", font = ('Ariel','15'), fg = 'blue')
-        self.g_quant = Entry(self.abas_pg1, width = 15, font = ('Ariel','15'))        
+        self.label15 = Label(self.abas_pg1, text="G",font=('Ariel','15'),fg='blue')
+        self.g_quant=Entry(self.abas_pg1, width=15, font=('Ariel','15'))        
 
-        self.label16 = Label(self.abas_pg1, text = "GG", font = ('Ariel','15'), fg = 'blue')
-        self.gg_quant = Entry(self.abas_pg1, width = 15, font = ('Ariel','15'))        
+        self.label16 = Label(self.abas_pg1, text="GG",font=('Ariel','15'),fg='blue')
+        self.gg_quant=Entry(self.abas_pg1, width=15, font=('Ariel','15'))        
                
         #Total             
-        self.label17 = Label(self.abas_pg1, text = "Total do Pedido", font = ('Courier','16','bold'))
-        self.totalp = Entry(self.abas_pg1, width = 15, font = ('Courier', '30'), fg = 'red')
+        self.label17 = Label(self.abas_pg1,text="Total do Pedido",font=('Courier','16','bold'))
+        self.totalp=Entry(self.abas_pg1, width=15,font=('Courier','30'), fg='red')
         
         #Botão OK
-        self.botao1 = Button(self.abas_pg1, text = "Faturar", font = ('Ariel','20'),
-                             fg = 'green', command = self.pedido)
+        self.botao1 = Button(self.abas_pg1, text="Faturar", font=('Ariel','20'),
+                             fg='green',command=self.pedido)
         
         #Botão Cancelar
-        self.botao3 = Button(self.abas_pg1, text = "Novo/Cancelar", font = ('Ariel','15'),
-                             fg = 'red', command = self.cancela)
+        self.botao3 = Button(self.abas_pg1, text="Novo/Cancelar", font=('Ariel','15'),
+                             fg='red',command=self.cancela)
         
         #Botão Imprimir
-        self.botao2 = Button(self.abas_pg1, text = "Imprimir", font = ('Ariel','15'),
-                             fg = 'green', command = self.imprimir)
+        self.botao2 = Button(self.abas_pg1, text="Imprimir", font=('Ariel','15'),
+                             fg='green',command=self.imprimir)
         
         #Radio buttons
         self.escolha = BooleanVar()
-        self.r1 = Radiobutton(self.abas_pg1, text = 'Varejo', font = ('Ariel','20'), variable = self.escolha, value=True)
+        self.r1 = Radiobutton(self.abas_pg1, text = 'Varejo',font=('Ariel','20'),variable=self.escolha,value=True)
         
-        self.r2 = Radiobutton(self.abas_pg1, text = 'Atacado', font = ('Ariel','20'), variable = self.escolha, value=False)
+        self.r2 = Radiobutton(self.abas_pg1, text='Atacado',font=('Ariel','20'),variable=self.escolha,value=False)
         
         #Desconto
-        self.label17b = Label(self.abas_pg1, text = "Desconto", font = ('Ariel','15'))                                                               
-        self.desconto = Entry(self.abas_pg1, width = 6, font = ('Ariel','20'))
+        self.label17b = Label(self.abas_pg1, text="Desconto",font=('Ariel','15'))                                                               
+        self.desconto = Entry(self.abas_pg1, width=6, font=('Ariel','20'))
        
         #ListBox
         self.scrollbar = Scrollbar(self.abas_pg1)        
         
-        self.listbox = Listbox(self.abas_pg1, selectmode = 'single', font = ('Courier','15'), fg = "blue")        
-        self.listbox.config(yscrollcommand = self.scrollbar.set)        
-        self.scrollbar.config(command = self.listbox.yview)
+        self.listbox = Listbox(self.abas_pg1,selectmode='single',font=('Courier','15'),fg="blue")        
+        self.listbox.config(yscrollcommand=self.scrollbar.set)        
+        self.scrollbar.config(command=self.listbox.yview)
 #-------------------------------Aba Clientes-------------------------------------------------------------------------
         self.frame1 = Frame(self.abas_pg2)
-        self.frame1.configure(relief = GROOVE)
-        self.frame1.configure(borderwidth = "2")
+        self.frame1.configure(relief=GROOVE)
+        self.frame1.configure(borderwidth="2")
         
-        self.label18 = Label(self.frame1, text = 'CADASTRO', font = ('Ariel','30'), fg = 'blue')
+        self.label18 = Label(self.frame1,text='CADASTRO',font=('Ariel','30'), fg='blue')
 
-        self.label19 = Label(self.frame1, text = 'Cliente', font = ('Ariel','15'))
-        self.cliente=Entry(self.frame1, font = ('Ariel','15'))
+        self.label19 = Label(self.frame1,text='Cliente',font=('Ariel','15'))
+        self.cliente=Entry(self.frame1,font=('Ariel','15'))
         
-        self.label20 = Label(self.frame1, text = u'Endereço', font = ('Ariel','15'))
-        self.endereco = Entry(self.frame1, font = ('Ariel','15'))
+        self.label20 = Label(self.frame1,text=u'Endereço',font=('Ariel','15'))
+        self.endereco = Entry(self.frame1,font=('Ariel','15'))
        
-        self.label21 = Label(self.frame1, text = 'Cidade', font = ('Ariel','15'))
-        self.cidade = Entry(self.frame1, font = ('Ariel','15'))
+        self.label21 = Label(self.frame1,text='Cidade',font=('Ariel','15'))
+        self.cidade = Entry(self.frame1,font=('Ariel','15'))
        
-        self.label22 = Label(self.frame1, text = 'CEP', font = ('Ariel','15'))
-        self.cep = Entry(self.frame1, font = ('Ariel','15'))
+        self.label22 = Label(self.frame1,text='CEP',font=('Ariel','15'))
+        self.cep = Entry(self.frame1,font=('Ariel','15'))
         
-        self.label23 = Label(self.frame1, text = 'CPF/CNPJ', font = ('Ariel','15'))
-        self.cpf = Entry(self.frame1, font = ('Ariel','15'))
+        self.label23 = Label(self.frame1,text='CPF/CNPJ',font=('Ariel','15'))
+        self.cpf = Entry(self.frame1,font=('Ariel','15'))
         
-        self.label24 = Label(self.frame1, text = 'Telefone', font = ('Ariel','15'))
-        self.fone = Entry(self.frame1, font = ('Ariel','15'))
+        self.label24 = Label(self.frame1,text='Telefone',font=('Ariel','15'))
+        self.fone = Entry(self.frame1,font=('Ariel','15'))
         
-        self.label25 = Label(self.frame1, text = 'E-mail', font = ('Ariel','15'))
-        self.mail = Entry(self.frame1, font = ('Ariel','15'))
+        self.label25 = Label(self.frame1,text='E-mail',font=('Ariel','15'))
+        self.mail = Entry(self.frame1,font=('Ariel','15'))
         
-        self.label26 = Label(self.frame1, text = 'Complemento', font = ('Ariel','15'))
-        self.comp = Text(self.frame1, font = ('Ariel','15'))
+        self.label26 = Label(self.frame1,text='Complemento',font=('Ariel','15'))
+        self.comp = Text(self.frame1,font=('Ariel','15'))
         
-        self.botaocadastra = Button(self.frame1, text = 'Cadastrar', font = ('Ariel','15'),
-                                    fg = 'green', command = self.cadastraclientes)
+        self.botaocadastra = Button(self.frame1,text='Cadastrar',font=('Ariel','15'),
+                                    fg='green',command=self.cadastraclientes)
         
         
-        self.botaocancela = Button(self.frame1, text = 'Limpar/Cancelar', font = ('Ariel','15'),
-                                   fg = 'blue', command = self.limpaclientes)
+        self.botaocancela = Button(self.frame1,text='Limpar/Cancelar',font=('Ariel','15'),
+                                   fg='blue',command=self.limpaclientes)
         
 
-        self.botao_alt_cliente = Button(self.frame1, text = 'Alterar', font = ('Ariel', '15'),
-                                        fg = 'red', command = self.alt_cliente)
+        self.botao_alt_cliente = Button(self.frame1, text='Alterar', font=('Ariel', '15'),
+                                        fg='red', command = self.alt_cliente)
         
         
         self.frame2 = Frame(self.abas_pg2)
-        self.frame2.configure(relief = GROOVE)
-        self.frame2.configure(borderwidth = "2")
+        self.frame2.configure(relief=GROOVE)
+        self.frame2.configure(borderwidth="2")
         
 
-        self.label27 = Label(self.frame2, text = 'CONSULTA', font = ('Ariel','30'), fg = 'blue')
-        self.consulta= AutocompleteCombobox(self.frame2, font = ("Ariel","15"))
+        self.label27 = Label(self.frame2,text='CONSULTA',font=('Ariel','30'), fg='blue')
+        self.consulta= AutocompleteCombobox(self.frame2,font=("Ariel","15"))
         
         #self.consulta["values"] = self.col
-        self.consulta.bind("<<ComboboxSelected>>", self.mostraclientes)
-        self.consulta.bind("<Return>", self.mostraclientes)
-        self.consulta.bind("<KP_Enter>", self.mostraclientes)
+        self.consulta.bind("<<ComboboxSelected>>",self.mostraclientes)
+        self.consulta.bind("<Return>",self.mostraclientes)
+        self.consulta.bind("<KP_Enter>",self.mostraclientes)
         
 
         self.frame3 = Frame(self.abas_pg2)
-        self.frame3.configure(relief = GROOVE)
-        self.frame3.configure(borderwidth = "2")
+        self.frame3.configure(relief=GROOVE)
+        self.frame3.configure(borderwidth="2")
         
-        self.mostra1 = Text(self.frame3, bg = 'light grey', font = ('Ariel','20'))
+        self.mostra1 = Text(self.frame3,bg='light grey',font=('Ariel','20'))
         
 #----------------------------------------------------ABA ESTOQUE-------------------------------------------------------
         self.frame4 = Frame(self.abas_pg3)
         
         
-        self.label28 = Label(self.frame4, text = u"PP/Único", font = ('Ariel','15'), fg = 'blue')
-        self.pp_estoque=Entry(self.frame4, width = 15, font = ('Ariel','15'))
+        self.label28 = Label(self.frame4, text=u"PP/Único",font=('Ariel','15'),fg='blue')
+        self.pp_estoque=Entry(self.frame4, width=15, font=('Ariel','15'))
         
 
-        self.label29 = Label(self.frame4, text = "P", font = ('Ariel','15'), fg = 'blue')
-        self.p_estoque=Entry(self.frame4, width = 15, font = ('Ariel','15'))
+        self.label29 = Label(self.frame4, text="P",font=('Ariel','15'),fg='blue')
+        self.p_estoque=Entry(self.frame4, width=15, font=('Ariel','15'))
         
 
-        self.label30 = Label(self.frame4, text = "M",font = ('Ariel','15'), fg = 'blue')
-        self.m_estoque=Entry(self.frame4, width = 15, font = ('Ariel','15'))
+        self.label30 = Label(self.frame4, text="M",font=('Ariel','15'),fg='blue')
+        self.m_estoque=Entry(self.frame4, width=15, font=('Ariel','15'))
         
 
-        self.label31 = Label(self.frame4, text = "G", font = ('Ariel','15'), fg = 'blue')
-        self.g_estoque=Entry(self.frame4, width = 15, font = ('Ariel','15'))
+        self.label31 = Label(self.frame4, text="G",font=('Ariel','15'),fg='blue')
+        self.g_estoque=Entry(self.frame4, width=15, font=('Ariel','15'))
         
 
-        self.label32 = Label(self.frame4, text = "GG", font = ('Ariel','15'), fg = 'blue')
-        self.gg_estoque=Entry(self.frame4, width = 15, font = ('Ariel','15'))        
+        self.label32 = Label(self.frame4, text="GG",font=('Ariel','15'),fg='blue')
+        self.gg_estoque=Entry(self.frame4, width=15, font=('Ariel','15'))        
         
                 
         #Cabeçalho da lista
-        self.dataCols = (u'Referência', u'Descrição', u'PP/Único', 'P', 'M', 'G', 'GG')
-        self.arvore = ttk.Treeview(self.frame4, columns = self.dataCols, show = 'headings')
+        self.dataCols = (u'Referência',u'Descrição',u'PP/Único','P','M','G','GG')
+        self.arvore = ttk.Treeview(self.frame4,columns=self.dataCols, show='headings')
         
         for c in self.dataCols:
             self.arvore.heading(c, text = c)
-            self.arvore.column(c, minwidth = 1, width = 10)
+            self.arvore.column(c,minwidth=1,width=10)
         self.rolagemy = Scrollbar(self.frame4)
         
-        self.arvore.config(yscrollcommand = self.rolagemy.set)
-        self.rolagemy.config(command = self.arvore.yview)
+        self.arvore.config(yscrollcommand=self.rolagemy.set)
+        self.rolagemy.config(command=self.arvore.yview)
 
-        self.botao_alt_produto = Button(self.frame4, text = 'Alterar', font = ('Arial','18'), command = self.alterar_produto)
+        self.botao_alt_produto = Button(self.frame4,text='Alterar',font=('Arial','25'),command=self.alterar_produto)
         
-        self.botao_limpa_produto = Button(self.frame4, text = 'Limpar', font = ('Arial','18'), command = self.limpa_estoque)
+        self.botao_limpa_produto = Button(self.frame4,text='Limpar',font=('Arial','25'),command=self.limpa_estoque)
         
 #-------------------------------------------Separador----------------------------------------------------------------------
-        self.separador = Frame(self.frame4, bd = 3, relief = SUNKEN, width = 2)
+        self.separador = Frame(self.frame4,bd=3,relief=SUNKEN,width=2)
         
 
-        self.label33 = Label(self.frame4, text = u"PP/Único", font = ('Ariel','15'), fg = 'blue')
-        self.pp_soma = Entry(self.frame4, width = 15, font = ('Ariel','15'))
+        self.label33 = Label(self.frame4, text=u"PP/Único",font=('Ariel','15'),fg='blue')
+        self.pp_soma = Entry(self.frame4, width=15, font=('Ariel','15'))
         
 
-        self.label34 = Label(self.frame4, text = "P", font = ('Ariel','15'), fg = 'blue')
-        self.p_soma = Entry(self.frame4, width = 15, font = ('Ariel','15'))
+        self.label34 = Label(self.frame4, text="P",font=('Ariel','15'),fg='blue')
+        self.p_soma = Entry(self.frame4, width=15, font=('Ariel','15'))
         
 
-        self.label35 = Label(self.frame4, text = "M", font = ('Ariel','15'), fg = 'blue')
-        self.m_soma = Entry(self.frame4, width = 15, font = ('Ariel','15'))
+        self.label35 = Label(self.frame4, text="M",font=('Ariel','15'),fg='blue')
+        self.m_soma = Entry(self.frame4, width=15, font=('Ariel','15'))
         
 
-        self.label36 = Label(self.frame4, text = "G", font = ('Ariel','15'), fg = 'blue')
-        self.g_soma = Entry(self.frame4, width = 15, font = ('Ariel','15'))
+        self.label36 = Label(self.frame4, text="G",font=('Ariel','15'),fg='blue')
+        self.g_soma = Entry(self.frame4, width=15, font=('Ariel','15'))
         
 
-        self.label37 = Label(self.frame4, text = "GG", font = ('Ariel','15'), fg = 'blue')
-        self.gg_soma = Entry(self.frame4, width = 15, font = ('Ariel','15'))
+        self.label37 = Label(self.frame4, text="GG",font=('Ariel','15'),fg='blue')
+        self.gg_soma = Entry(self.frame4, width=15, font=('Ariel','15'))
         
 
-        self.botao_add = Button(self.frame4, text = 'Adicionar', font = ('Arial','25'),
-                                command = self.somar_estoque)
+        self.botao_add = Button(self.frame4,text='Adicionar',font=('Arial','25'),
+                                command=self.somar_estoque)
         
         
 #---------------------------------------Separador--------------------------------------------------------------------------
 
-        self.separador2 = Frame(self.frame4, bd = 3, relief = SUNKEN, width = 2)        
+        self.separador2 = Frame(self.frame4,bd=3,relief=SUNKEN,width=2)        
 
-        self.label38 = Label(self.frame4, text = u"Referência", font = ('Ariel', '18'), fg = 'blue')
-        self.ref_estoque=Entry(self.frame4, width = 15, font = ('Ariel', '18'))
-        self.ref_estoque.bind("<Return>", self.pesquisa_referencia_bind)
-        self.ref_estoque.bind("<KP_Enter>", self.pesquisa_referencia_bind)
+        self.label38 = Label(self.frame4, text=u"Referência",font=('Ariel','18'),fg='blue')
+        self.ref_estoque=Entry(self.frame4, width=15, font=('Ariel','18'))
+        self.ref_estoque.bind("<Return>",self.pesquisa_referencia_bind)
+        self.ref_estoque.bind("<KP_Enter>",self.pesquisa_referencia_bind)
         
 
-        self.botao_pesq_produto = Button(self.frame4, text = 'Pesquisar', font = ('Arial','20'),
-                                         command = self.pesquisa_referencia)
+        self.botao_pesq_produto = Button(self.frame4,text='Pesquisar',font=('Arial','20'),
+                                         command=self.pesquisa_referencia)
         
 
-        self.label39 = Label(self.frame4, text = u"Descrição", font = ('Ariel','18'), fg = 'blue')
+        self.label39 = Label(self.frame4, text=u"Descrição",font=('Ariel','18'),fg='blue')
         self.lista_referencia()
 
-        self.botao_del_produto = Button(self.frame4, text = 'Apagar', font = ('Arial','25'), fg = 'red',
-                                        command = self.deleta_produto)
+        self.botao_del_produto = Button(self.frame4,text='Apagar',font=('Arial','25'),fg='red',
+                                        command=self.deleta_produto)
         
 
 #--------------------------------------Aba Relatórios-------------------------------------------------------------------
-        self.relb1 = Button(self.abas_pg4, text = 'Mais Vendido', font = ('Courier','20'),
-                command = self.rel_mais_vendido)
+        self.relb1 = Button(self.abas_pg4,text='Mais Vendido',font=('Courier','20'),
+                command=self.rel_mais_vendido)
 
-        self.relb2 = Button(self.abas_pg4, text = 'Por Data', font = ('Courier','20'),
-                command = self.janela_data)
+        self.relb2 = Button(self.abas_pg4,text='Por Data',font=('Courier','20'),
+                command=self.janela_data)
 
-        self.relb3 = Button(self.abas_pg4, text = 'Por vendedor', font = ('Courier','20'),
-                command = self.janela_vend_data)
+        self.relb3 = Button(self.abas_pg4,text='Por vendedor',font=('Courier','20'),
+                command=self.janela_vend_data)
 
-        self.relb4 = Button(self.abas_pg4, text = 'Por Cliente', font = ('Courier','20'),
-                command = self.janela_rel_cliente)
+        self.relb4 = Button(self.abas_pg4,text='Por Cliente',font=('Courier','20'),
+                command=self.janela_rel_cliente)
 
     def tela_principal(self):
         '''Empacota todos os widgets da tela principal'''
         #cadastro
-        self.abas.place(relx = 0.0, rely = 0.0, relheight = 1.0, relwidth = 1.0)
-        self.label1.place(relx = 0.290, rely = 0.010)
-        self.label2.place(relx = 0.00, rely = 0.11)
-        self.label3.place(relx = 0.430, rely = 0.11)
-        self.label4.place(relx = 0.755, rely = 0.11)
-        self.label5.place(relx = 0.430, rely = 0.29)
-        self.label6.place(relx = 0.270, rely = 0.62)
-        self.label7.place(relx = 0.00, rely = 0.70)
-        self.label8.place(relx = 0.00, rely = 0.85)
+        self.abas.place(relx=0.0,rely=0.0,relheight=1.0,relwidth=1.0)
+        self.label1.place(relx=0.290,rely=0.010)
+        self.label2.place(relx=0.00,rely=0.11)
+        self.label3.place(relx=0.430,rely=0.11)
+        self.label4.place(relx=0.755,rely=0.11)
+        self.label5.place(relx=0.430,rely=0.29)
+        self.label6.place(relx=0.270,rely=0.62)
+        self.label7.place(relx=0.00,rely=0.70)
+        self.label8.place(relx=0.00,rely=0.85)
         #Venda
-        self.label9.place(relx = 0.0, rely = 0.02)
-        self.label10.place(relx = 0.0, rely = 0.135)
-        self.label11.place(relx = 0.0, rely = 0.25)
-        self.label12.place(relx = 0.15, rely = 0.00)
-        self.label13.place(relx = 0.15, rely = 0.10)
-        self.label14.place(relx = 0.15, rely = 0.20)
-        self.label15.place(relx = 0.15, rely = 0.30)
-        self.label16.place(relx = 0.15, rely = 0.40)
-        self.label17.place(relx = 0.75, rely = 0.30)
-        self.label17b.place(relx = 0.0, rely = 0.37)
+        self.label9.place(relx=-0.0,rely=0.02)
+        self.label10.place(relx=0.0,rely=0.135)
+        self.label11.place(relx=-0.0,rely=0.25)
+        self.label12.place(relx=0.15,rely=0.00)
+        self.label13.place(relx=0.15,rely=0.10)
+        self.label14.place(relx=0.15,rely=0.20)
+        self.label15.place(relx=0.15,rely=0.30)
+        self.label16.place(relx=0.15,rely=0.40)
+        self.label17.place(relx=0.75,rely=0.30)
+        self.label17b.place(relx=0.0,rely=0.37)
         #clientes
-        self.label18.place(relx = 0.30, rely = 0.01)
-        self.label19.place(relx = 0.02, rely = 0.12)
-        self.label20.place(relx = 0.02, rely = 0.21)
-        self.label21.place(relx = 0.02, rely = 0.30)
-        self.label22.place(relx = 0.02, rely = 0.39)
-        self.label23.place(relx = 0.02, rely = 0.48)
-        self.label24.place(relx = 0.02, rely = 0.57)
-        self.label25.place(relx = 0.02, rely = 0.66)
-        self.label26.place(relx = 0.02, rely = 0.76)
-        self.label27.place(relx = 0.32, rely = 0.05)
+        self.label18.place(relx=0.30,rely=0.01)
+        self.label19.place(relx=0.02,rely=0.12)
+        self.label20.place(relx=0.02,rely=0.21)
+        self.label21.place(relx=0.02,rely=0.30)
+        self.label22.place(relx=0.02,rely=0.39)
+        self.label23.place(relx=0.02,rely=0.48)
+        self.label24.place(relx=0.02,rely=0.57)
+        self.label25.place(relx=0.02,rely=0.66)
+        self.label26.place(relx=0.02,rely=0.76)
+        self.label27.place(relx=0.32,rely=0.05)
         #EStoque
-        self.label28.place(relx = 0.0, rely = 0.00)
-        self.label29.place(relx = 0.0, rely = 0.10)
-        self.label30.place(relx = 0.0, rely = 0.20)
-        self.label31.place(relx = 0.0, rely = 0.30)
-        self.label32.place(relx = 0.0, rely = 0.40)
-        self.label33.place(relx = 0.28, rely = 0.00)
-        self.label34.place(relx = 0.28, rely = 0.10)
-        self.label35.place(relx = 0.28, rely = 0.20)
-        self.label36.place(relx = 0.28, rely = 0.30)
-        self.label37.place(relx = 0.28, rely = 0.40)
-        self.label38.place(relx = 0.58, rely = 0.00)
-        self.label39.place(relx = 0.58, rely = 0.15)
+        self.label28.place(relx=0.0,rely=0.00)
+        self.label29.place(relx=0.0,rely=0.10)
+        self.label30.place(relx=0.0,rely=0.20)
+        self.label31.place(relx=0.0,rely=0.30)
+        self.label32.place(relx=0.0,rely=0.40)
+        self.label33.place(relx=0.28,rely=0.00)
+        self.label34.place(relx=0.28,rely=0.10)
+        self.label35.place(relx=0.28,rely=0.20)
+        self.label36.place(relx=0.28,rely=0.30)
+        self.label37.place(relx=0.28,rely=0.40)
+        self.label38.place(relx=0.58,rely=0.00)
+        self.label39.place(relx=0.58,rely=0.15)
         
 
         #Cadastro
-        self.b_cadastra_vendedor.place(relx = 0.40, rely = 0.85, height = 100, width = 200)
-        self.ref_c.place(relx = 0.00, rely = 0.17)
-        self.precov.place(relx = 0.417, rely = 0.17, width = 170)
-        self.precoa.place(relx = 0.75, rely = 0.17, width = 170)
-        self.desc_c.place(relx = 0.265, rely = 0.35, relwidth = 0.45)
-        self.botao_cadastra.place(relx = 0.30, rely = 0.45, height = 100, width = 180)
-        self.botao_cancela.place(relx = 0.49, rely = 0.45, height = 100, width = 180)
-        self.sep_cadastro.place(relx = 0.0, rely = 0.60, relwidth = 1.0)
-        self.vend_c.place(relx = 0.00, rely = 0.75)
-        self.senha_c.place(relx = 0.00, rely = 0.90)
+        self.b_cadastra_vendedor.place(relx=0.40,rely=0.85,height=100,width=200)
+        self.ref_c.place(relx=0.00,rely=0.17)
+        self.precov.place(relx=0.417,rely=0.17,width=170)
+        self.precoa.place(relx=0.75,rely=0.17,width=170)
+        self.desc_c.place(relx=0.265,rely=0.35,relwidth=0.45)
+        self.botao_cadastra.place(relx=0.30,rely=0.45,height=100,width=180)
+        self.botao_cancela.place(relx=0.49,rely=0.45,height=100,width=180)
+        self.sep_cadastro.place(relx=0.0,rely=0.60,relwidth=1.0)
+        self.vend_c.place(relx=0.00,rely=0.75)
+        self.senha_c.place(relx=0.00,rely=0.90)
         #venda
-        self.venda_cliente.place(relx = 0.0, rely = 0.18)
-        self.ref.place(relx = 0.0, rely = 0.30)
-        self.separador0.place(relx = 0.14, rely = 0.0, relheight = 0.55)
-        self.pp_quant.place(relx = 0.15, rely = 0.04)
-        self.p_quant.place(relx = 0.15, rely = 0.14)
-        self.m_quant.place(relx = 0.15, rely = 0.24)
-        self.g_quant.place(relx = 0.15, rely = 0.34)
-        self.gg_quant.place(relx = 0.15, rely = 0.44)
-        self.totalp.place(relx = 0.7, rely = 0.37)
-        self.botao1.place(relx = 0.37, rely = 0.08, height = 40, width = 167)
-        self.botao3.place(relx = 0.37, rely = 0.25, height = 40, width = 167)
-        self.botao2.place(relx = 0.37, rely = 0.40, height = 46, width = 167)
-        self.r1.place(relx = 0.75, rely = 0.03)
-        self.r2.place(relx = 0.75, rely = 0.12)
-        self.desconto.place(relx = 0.0, rely = 0.42)
-        self.listbox.place(relx = 0.0, rely = 0.52, relwidth = 0.987, relheight = 0.450)
-        self.scrollbar.place(relx = 0.99, rely = 0.52, relheight = 0.450)
+        self.venda_cliente.place(relx=0.0, rely=0.18)
+        self.ref.place(relx=0.0,rely=0.30)
+        self.separador0.place(relx=0.14,rely=0.0,relheight=0.55)
+        self.pp_quant.place(relx=0.15,rely=0.04)
+        self.p_quant.place(relx=0.15,rely=0.14)
+        self.m_quant.place(relx=0.15,rely=0.24)
+        self.g_quant.place(relx=0.15,rely=0.34)
+        self.gg_quant.place(relx=0.15,rely=0.44)
+        self.totalp.place(relx=0.7,rely=0.37)
+        self.botao1.place(relx=0.37,rely=0.08,height=40,width=167)
+        self.botao3.place(relx=0.37,rely=0.25,height=40,width=167)
+        self.botao2.place(relx=0.37,rely=0.40,height=46,width=167)
+        self.r1.place(relx=0.75,rely=0.03)
+        self.r2.place(relx=0.75,rely=0.12)
+        self.desconto.place(relx=0.0,rely=0.42)
+        self.listbox.place(relx=0.0,rely=0.52,relwidth=0.987,relheight=0.450)
+        self.scrollbar.place(relx=0.99,rely=0.52,relheight=0.450)
         #clientes
-        self.frame1.place(relx = 0.0, rely = 0.0, relheight = 1.0, relwidth = 0.50)
-        self.cliente.place(relx = 0.02, rely = 0.16)
-        self.endereco.place(relx = 0.02, rely = 0.25, relwidth = 0.94)
-        self.cidade.place(relx = 0.02, rely = 0.34)
-        self.cep.place(relx = 0.02, rely = 0.43)
-        self.cpf.place(relx = 0.02, rely = 0.52)
-        self.fone.place(relx = 0.02, rely = 0.61)
-        self.mail.place(relx = 0.02, rely = 0.71)
-        self.comp.place(relx = 0.02, rely = 0.81, relwidth = 0.94, relheight = 0.19)
-        self.botaocadastra.place(relx = 0.62, rely = 0.33, relwidth = 0.35)
-        self.botaocancela.place(relx = 0.62, rely = 0.44, relwidth = 0.35)
-        self.botao_alt_cliente.place(relx = 0.62,  rely = 0.55,  relwidth = 0.35)
-        self.frame2.place(relx = 0.50, rely = 0.0, relheight = 0.31, relwidth = 0.50)
-        self.consulta.place(relx = 0.29, rely = 0.47)
-        self.frame3.place(relx = 0.50, rely = 0.31, relheight = 0.69, relwidth = 0.50)
-        self.mostra1.place(relx = 0.0, rely = 0.00, relheight = 1.0, relwidth = 1.0)
+        self.frame1.place(relx=0.0,rely=0.0,relheight=1.0,relwidth=0.50)
+        self.cliente.place(relx=0.02,rely=0.16)
+        self.endereco.place(relx=0.02,rely=0.25,relwidth=0.94)
+        self.cidade.place(relx=0.02,rely=0.34)
+        self.cep.place(relx=0.02,rely=0.43)
+        self.cpf.place(relx=0.02,rely=0.52)
+        self.fone.place(relx=0.02,rely=0.61)
+        self.mail.place(relx=0.02,rely=0.71)
+        self.comp.place(relx=0.02,rely=0.81,relwidth=0.94,relheight=0.19)
+        self.botaocadastra.place(relx=0.62,rely=0.33,relwidth=0.35)
+        self.botaocancela.place(relx=0.62,rely=0.44,relwidth=0.35)
+        self.botao_alt_cliente.place(relx = 0.62, rely = 0.55, relwidth = 0.35)
+        self.frame2.place(relx=0.50,rely=0.0,relheight=0.31,relwidth=0.50)
+        self.consulta.place(relx=0.29,rely=0.47)
+        self.frame3.place(relx=0.50,rely=0.31,relheight=0.69,relwidth=0.50)
+        self.mostra1.place(relx=0.0,rely=0.00,relheight=1.0,relwidth=1.0)
         #Estoque
         self.frame4.place(relx=0.0,rely=0.00,relheight=1.0,relwidth=1.0)
         self.pp_estoque.place(relx=0.0,rely=0.04)
@@ -455,7 +455,7 @@ class main:
         self.botao_add.place(relx=0.28,rely=0.55)
         self.ref_estoque.place(relx=0.58,rely=0.07)
         self.botao_pesq_produto.place(relx=0.85,rely=0.07)
-        self.botao_del_produto.place(relx=0.86,rely=0.60)
+        self.botao_del_produto.place(relx=0.86,rely=0.62)
         self.separador2.place(relx=0.573,rely=0.0,relheight=0.70)
         #relatorios
         self.relb1.place(relx=0.01,rely=0.002, relwidth = 0.22)
@@ -1013,9 +1013,9 @@ Complemento: {}'''.format(i[1],i[2],i[3],i[4],i[5],i[6],i[7],i[8]))
                 self.tela_principal()
 
             else:
-                tkMessageBox.showwarning('Aviso!', u'Senha inválida')
+                tkMessageBox.showwarning('Aviso!',u'Senha inválida')
         except:
-            tkMessageBox.showwarning('Aviso!', u'Usuário inválido')
+            tkMessageBox.showwarning('Aviso!',u'Usuário inválido')
 
 
     def autentica2(self,event):

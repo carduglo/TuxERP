@@ -62,10 +62,10 @@ class main:
         self.abas.tab(1, text = "Estoque", underline = "-1",)
         self.abas_pg2 = ttk.Frame(self.abas)
         self.abas.add(self.abas_pg2, padding = 3)
-        self.abas.tab(2, text = "Clientes", underline = "-1",)
+        self.abas.tab(2, text = "Clientes",underline = "-1",)
         self.abas_pg1 = ttk.Frame(self.abas)
         self.abas.add(self.abas_pg1, padding = 3)
-        self.abas.tab(3, text = "Venda", underline = "-1",)
+        self.abas.tab(3, text = "Venda",underline = "-1",)
         self.abas_pg4 = ttk.Frame(self.abas)
         self.abas.add(self.abas_pg4, padding = 3)
         self.abas.tab(4, text = u"Relatórios", underline = "-1",)        
@@ -75,11 +75,11 @@ class main:
         #Referencia
         self.label2 = Label(self.abas_pg0, text = u"Referência", font = ('Ariel','15'))
         self.ref_c = Entry(self.abas_pg0, width = 20, font = ('Ariel','20'))        
-        #Preço varejo
+        #Preço varejo 
         self.label3 = Label(self.abas_pg0, text = u"Preço Varejo", font = ('Ariel','15'))
         self.precov = Entry(self.abas_pg0, width = 6, font = ('Ariel','20'))        
         #Preço Atacado
-        self.label4 = Label(self.abas_pg0, text = u"Preço Atacado",font = ('Ariel','15'))
+        self.label4 = Label(self.abas_pg0, text = u"Preço Atacado", font = ('Ariel','15'))
         self.precoa = Entry(self.abas_pg0, width = 6, font = ('Ariel','20'))        
         #Descrição
         self.label5 = Label(self.abas_pg0, text = u"Descrição", font = ('Ariel','15'))
@@ -89,7 +89,7 @@ class main:
                                      fg = 'green', command = self.cadastra)        
         #Botao Cancela cadastro
         self.botao_cancela = Button(self.abas_pg0, text = "Novo/Cancelar",
-                             font = ('Ariel','15'), fg = 'red', command = self.cancela_cadastro)        
+                             font = ('Ariel','10'), fg = 'red', command = self.cancela_cadastro)        
 
         self.sep_cadastro = Frame(self.abas_pg0, bd = 3, relief = SUNKEN, height = 2)
         
@@ -109,7 +109,7 @@ class main:
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Aba Venda~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         #Entrada vendedor
-        self.label9 = Label(self.abas_pg1, text = u"Vendedor", font = ('Ariel','15'))
+        self.label9 = Label(self.abas_pg1, text = u"Vendedor",font = ('Ariel','15'))
         self.lista_vendedores()
         #Entrada cliente
         self.label10 = Label(self.abas_pg1,text = 'Cliente', font = ('Ariel','15'))
@@ -134,7 +134,7 @@ class main:
         self.label13 = Label(self.abas_pg1, text = "P", font = ('Ariel','15'), fg = 'blue')
         self.p_quant = Entry(self.abas_pg1, width = 15, font = ('Ariel','15'))        
 
-        self.label14 = Label(self.abas_pg1, text = "M", font = ('Ariel','15'), fg = 'blue')
+        self.label14 = Label(self.abas_pg1, text = "M",font = ('Ariel','15'), fg = 'blue')
         self.m_quant = Entry(self.abas_pg1, width = 15, font = ('Ariel','15'))        
 
         self.label15 = Label(self.abas_pg1, text = "G", font = ('Ariel','15'), fg = 'blue')
@@ -144,8 +144,8 @@ class main:
         self.gg_quant = Entry(self.abas_pg1, width = 15, font = ('Ariel','15'))        
                
         #Total             
-        self.label17 = Label(self.abas_pg1, text = "Total do Pedido", font = ('Courier','16','bold'))
-        self.totalp = Entry(self.abas_pg1, width = 15, font = ('Courier', '30'), fg = 'red')
+        self.label17 = Label(self.abas_pg1,text = "Total do Pedido",font = ('Courier','16','bold'))
+        self.totalp = Entry(self.abas_pg1, width = 15, font = ('Courier','30'), fg = 'red')
         
         #Botão OK
         self.botao1 = Button(self.abas_pg1, text = "Faturar", font = ('Ariel','20'),
@@ -161,9 +161,9 @@ class main:
         
         #Radio buttons
         self.escolha = BooleanVar()
-        self.r1 = Radiobutton(self.abas_pg1, text = 'Varejo', font = ('Ariel','20'), variable = self.escolha, value=True)
+        self.r1 = Radiobutton(self.abas_pg1, text = 'Varejo', font = ('Ariel','20'), variable = self.escolha, value = True)
         
-        self.r2 = Radiobutton(self.abas_pg1, text = 'Atacado', font = ('Ariel','20'), variable = self.escolha, value=False)
+        self.r2 = Radiobutton(self.abas_pg1, text = 'Atacado', font = ('Ariel','20'), variable = self.escolha, value = False)
         
         #Desconto
         self.label17b = Label(self.abas_pg1, text = "Desconto", font = ('Ariel','15'))                                                               
@@ -183,7 +183,7 @@ class main:
         self.label18 = Label(self.frame1, text = 'CADASTRO', font = ('Ariel','30'), fg = 'blue')
 
         self.label19 = Label(self.frame1, text = 'Cliente', font = ('Ariel','15'))
-        self.cliente=Entry(self.frame1, font = ('Ariel','15'))
+        self.cliente = Entry(self.frame1, font = ('Ariel','15'))
         
         self.label20 = Label(self.frame1, text = u'Endereço', font = ('Ariel','15'))
         self.endereco = Entry(self.frame1, font = ('Ariel','15'))
@@ -191,22 +191,22 @@ class main:
         self.label21 = Label(self.frame1, text = 'Cidade', font = ('Ariel','15'))
         self.cidade = Entry(self.frame1, font = ('Ariel','15'))
        
-        self.label22 = Label(self.frame1, text = 'CEP', font = ('Ariel','15'))
-        self.cep = Entry(self.frame1, font = ('Ariel','15'))
+        self.label22 = Label(self.frame1,text = 'CEP', font = ('Ariel','15'))
+        self.cep = Entry(self.frame1,font = ('Ariel','15'))
         
-        self.label23 = Label(self.frame1, text = 'CPF/CNPJ', font = ('Ariel','15'))
-        self.cpf = Entry(self.frame1, font = ('Ariel','15'))
+        self.label23 = Label(self.frame1,text = 'CPF/CNPJ', font = ('Ariel','15'))
+        self.cpf = Entry(self.frame1,font = ('Ariel','15'))
         
-        self.label24 = Label(self.frame1, text = 'Telefone', font = ('Ariel','15'))
+        self.label24 = Label(self.frame1,text = 'Telefone', font = ('Ariel','15'))
         self.fone = Entry(self.frame1, font = ('Ariel','15'))
         
-        self.label25 = Label(self.frame1, text = 'E-mail', font = ('Ariel','15'))
+        self.label25 = Label(self.frame1,text = 'E-mail', font = ('Ariel','15'))
         self.mail = Entry(self.frame1, font = ('Ariel','15'))
         
-        self.label26 = Label(self.frame1, text = 'Complemento', font = ('Ariel','15'))
+        self.label26 = Label(self.frame1,text = 'Complemento', font = ('Ariel','15'))
         self.comp = Text(self.frame1, font = ('Ariel','15'))
         
-        self.botaocadastra = Button(self.frame1, text = 'Cadastrar', font = ('Ariel','15'),
+        self.botaocadastra = Button(self.frame1, text = 'Cadastrar', font = ('Ariel','20'),
                                     fg = 'green', command = self.cadastraclientes)
         
         
@@ -214,22 +214,22 @@ class main:
                                    fg = 'blue', command = self.limpaclientes)
         
 
-        self.botao_alt_cliente = Button(self.frame1, text = 'Alterar', font = ('Ariel', '15'),
-                                        fg = 'red', command = self.alt_cliente)
+        self.botao_alt_cliente = Button(self.frame1, text = 'Alterar', font = ('Ariel', '20'),
+                                        fg ='red', command = self.alt_cliente)
         
         
         self.frame2 = Frame(self.abas_pg2)
-        self.frame2.configure(relief = GROOVE)
+        self.frame2.configure(relief=GROOVE)
         self.frame2.configure(borderwidth = "2")
         
 
         self.label27 = Label(self.frame2, text = 'CONSULTA', font = ('Ariel','30'), fg = 'blue')
-        self.consulta= AutocompleteCombobox(self.frame2, font = ("Ariel","15"))
+        self.consulta = AutocompleteCombobox(self.frame2, font = ("Ariel","15"))
         
         #self.consulta["values"] = self.col
-        self.consulta.bind("<<ComboboxSelected>>", self.mostraclientes)
-        self.consulta.bind("<Return>", self.mostraclientes)
-        self.consulta.bind("<KP_Enter>", self.mostraclientes)
+        self.consulta.bind("<<ComboboxSelected>>",self.mostraclientes)
+        self.consulta.bind("<Return>",self.mostraclientes)
+        self.consulta.bind("<KP_Enter>",self.mostraclientes)
         
 
         self.frame3 = Frame(self.abas_pg2)
@@ -243,15 +243,15 @@ class main:
         
         
         self.label28 = Label(self.frame4, text = u"PP/Único", font = ('Ariel','15'), fg = 'blue')
-        self.pp_estoque=Entry(self.frame4, width = 15, font = ('Ariel','15'))
+        self.pp_estoque = Entry(self.frame4, width = 15, font = ('Ariel','15'))
         
 
         self.label29 = Label(self.frame4, text = "P", font = ('Ariel','15'), fg = 'blue')
-        self.p_estoque=Entry(self.frame4, width = 15, font = ('Ariel','15'))
+        self.p_estoque = Entry(self.frame4, width = 15, font = ('Ariel','15'))
         
 
-        self.label30 = Label(self.frame4, text = "M",font = ('Ariel','15'), fg = 'blue')
-        self.m_estoque=Entry(self.frame4, width = 15, font = ('Ariel','15'))
+        self.label30 = Label(self.frame4, text = "M", font = ('Ariel','15'), fg = 'blue')
+        self.m_estoque = Entry(self.frame4, width = 15, font = ('Ariel','15'))
         
 
         self.label31 = Label(self.frame4, text = "G", font = ('Ariel','15'), fg = 'blue')
@@ -263,20 +263,20 @@ class main:
         
                 
         #Cabeçalho da lista
-        self.dataCols = (u'Referência', u'Descrição', u'PP/Único', 'P', 'M', 'G', 'GG')
+        self.dataCols = (u'Referência',u'Descrição',u'PP/Único','P','M','G','GG')
         self.arvore = ttk.Treeview(self.frame4, columns = self.dataCols, show = 'headings')
         
         for c in self.dataCols:
             self.arvore.heading(c, text = c)
-            self.arvore.column(c, minwidth = 1, width = 10)
+            self.arvore.column(c,minwidth = 1, width = 10)
         self.rolagemy = Scrollbar(self.frame4)
         
         self.arvore.config(yscrollcommand = self.rolagemy.set)
         self.rolagemy.config(command = self.arvore.yview)
 
-        self.botao_alt_produto = Button(self.frame4, text = 'Alterar', font = ('Arial','18'), command = self.alterar_produto)
+        self.botao_alt_produto = Button(self.frame4, text = 'Alterar', font = ('Arial','25'), command = self.alterar_produto)
         
-        self.botao_limpa_produto = Button(self.frame4, text = 'Limpar', font = ('Arial','18'), command = self.limpa_estoque)
+        self.botao_limpa_produto = Button(self.frame4, text = 'Limpar', font = ('Arial','25'), command = self.limpa_estoque)
         
 #-------------------------------------------Separador----------------------------------------------------------------------
         self.separador = Frame(self.frame4, bd = 3, relief = SUNKEN, width = 2)
@@ -310,8 +310,8 @@ class main:
 
         self.separador2 = Frame(self.frame4, bd = 3, relief = SUNKEN, width = 2)        
 
-        self.label38 = Label(self.frame4, text = u"Referência", font = ('Ariel', '18'), fg = 'blue')
-        self.ref_estoque=Entry(self.frame4, width = 15, font = ('Ariel', '18'))
+        self.label38 = Label(self.frame4, text = u"Referência", font = ('Ariel','18'), fg = 'blue')
+        self.ref_estoque = Entry(self.frame4, width = 15, font = ('Ariel','18'))
         self.ref_estoque.bind("<Return>", self.pesquisa_referencia_bind)
         self.ref_estoque.bind("<KP_Enter>", self.pesquisa_referencia_bind)
         
@@ -344,39 +344,41 @@ class main:
         '''Empacota todos os widgets da tela principal'''
         #cadastro
         self.abas.place(relx = 0.0, rely = 0.0, relheight = 1.0, relwidth = 1.0)
-        self.label1.place(relx = 0.290, rely = 0.010)
+        self.label1.place(relx = 0.290, rely = 0.01)
         self.label2.place(relx = 0.00, rely = 0.11)
-        self.label3.place(relx = 0.430, rely = 0.11)
+        self.label3.place(relx = 0.430,rely = 0.11)
         self.label4.place(relx = 0.755, rely = 0.11)
-        self.label5.place(relx = 0.430, rely = 0.29)
+        self.label5.place(relx =0.430, rely = 0.29)
         self.label6.place(relx = 0.270, rely = 0.62)
         self.label7.place(relx = 0.00, rely = 0.70)
         self.label8.place(relx = 0.00, rely = 0.85)
-        #Venda
+        #Venda  
         self.label9.place(relx = 0.0, rely = 0.02)
         self.label10.place(relx = 0.0, rely = 0.135)
         self.label11.place(relx = 0.0, rely = 0.25)
-        self.label12.place(relx = 0.15, rely = 0.00)
-        self.label13.place(relx = 0.15, rely = 0.10)
-        self.label14.place(relx = 0.15, rely = 0.20)
-        self.label15.place(relx = 0.15, rely = 0.30)
-        self.label16.place(relx = 0.15, rely = 0.40)
-        self.label17.place(relx = 0.75, rely = 0.30)
-        self.label17b.place(relx = 0.0, rely = 0.37)
+        self.label12.place(relx = 0.25, rely = 0.00)
+        self.label13.place(relx = 0.25, rely = 0.10)
+        self.label14.place(relx = 0.25, rely = 0.20)
+        self.label15.place(relx = 0.25, rely = 0.30)
+        self.label16.place(relx = 0.25, rely = 0.40)
+        
+        self.label17.place(relx = 0.75, rely = 0.37)
+        #self.label17b.place(relx=0.0,rely=0.37)
+       
         #clientes
-        self.label18.place(relx = 0.30, rely = 0.01)
+        self.label18.place(relx = 0.30, rely = 0.01) 
         self.label19.place(relx = 0.02, rely = 0.12)
         self.label20.place(relx = 0.02, rely = 0.21)
         self.label21.place(relx = 0.02, rely = 0.30)
         self.label22.place(relx = 0.02, rely = 0.39)
         self.label23.place(relx = 0.02, rely = 0.48)
         self.label24.place(relx = 0.02, rely = 0.57)
-        self.label25.place(relx = 0.02, rely = 0.66)
+        self.label25.place(relx = 0.02, rely = 0.66) 
         self.label26.place(relx = 0.02, rely = 0.76)
         self.label27.place(relx = 0.32, rely = 0.05)
-        #EStoque
-        self.label28.place(relx = 0.0, rely = 0.00)
-        self.label29.place(relx = 0.0, rely = 0.10)
+        #Estoque
+        self.label28.place(relx = 0.0, rel = 0.00)
+        self.label29.place(relx = 0.0, rely = 0.10) 
         self.label30.place(relx = 0.0, rely = 0.20)
         self.label31.place(relx = 0.0, rely = 0.30)
         self.label32.place(relx = 0.0, rely = 0.40)
@@ -390,79 +392,88 @@ class main:
         
 
         #Cadastro
-        self.b_cadastra_vendedor.place(relx = 0.40, rely = 0.85, height = 100, width = 200)
+        self.b_cadastra_vendedor.place(relx=0.40,rely=0.85,height=100,width=200)
         self.ref_c.place(relx = 0.00, rely = 0.17)
-        self.precov.place(relx = 0.417, rely = 0.17, width = 170)
+        self.precov.place(relx = 0.417,rely= 0.17, width = 170)
         self.precoa.place(relx = 0.75, rely = 0.17, width = 170)
         self.desc_c.place(relx = 0.265, rely = 0.35, relwidth = 0.45)
         self.botao_cadastra.place(relx = 0.30, rely = 0.45, height = 100, width = 180)
-        self.botao_cancela.place(relx = 0.49, rely = 0.45, height = 100, width = 180)
-        self.sep_cadastro.place(relx = 0.0, rely = 0.60, relwidth = 1.0)
+        self.botao_cancela.place(relx = 0.49,rely = 0.45, height = 100,width = 180)
+        self.sep_cadastro.place(relx = 0.0,rely = 0.60, relwidth = 1.0)
         self.vend_c.place(relx = 0.00, rely = 0.75)
         self.senha_c.place(relx = 0.00, rely = 0.90)
         #venda
         self.venda_cliente.place(relx = 0.0, rely = 0.18)
-        self.ref.place(relx = 0.0, rely = 0.30)
-        self.separador0.place(relx = 0.14, rely = 0.0, relheight = 0.55)
-        self.pp_quant.place(relx = 0.15, rely = 0.04)
-        self.p_quant.place(relx = 0.15, rely = 0.14)
-        self.m_quant.place(relx = 0.15, rely = 0.24)
-        self.g_quant.place(relx = 0.15, rely = 0.34)
-        self.gg_quant.place(relx = 0.15, rely = 0.44)
-        self.totalp.place(relx = 0.7, rely = 0.37)
-        self.botao1.place(relx = 0.37, rely = 0.08, height = 40, width = 167)
-        self.botao3.place(relx = 0.37, rely = 0.25, height = 40, width = 167)
-        self.botao2.place(relx = 0.37, rely = 0.40, height = 46, width = 167)
+        self.ref.place(relx = 0.0,rely = 0.30)
+
+        self.separador0.place(relx = 0.20, rely = 0.0, relheight = 0.55)
+
+        self.pp_quant.place(relx = 0.25, rely = 0.04)
+        self.p_quant.place(relx = 0.25, rely = 0.14)
+        self.m_quant.place(relx = 0.25, rely = 0.24)
+        self.g_quant.place(relx = 0.25, rely = 0.34)
+        self.gg_quant.place(relx = 0.25, rely = 0.44)
+    
+        self.totalp.place(relx = 0.63, rely = 0.43)
+
+#====================================== Lay-out botoes ====================================== 
+
+        self.botao1.place(relx = 0.53, rely = 0.06, height = 40, width = 110) #Faturar
+        self.botao3.place(relx = 0.50, rely = 0.18, height = 40, width = 170) #Novo/cancela
+        self.botao2.place(relx = 0.50, rely = 0.29, height = 46, width = 167) #Imprimir
+      
         self.r1.place(relx = 0.75, rely = 0.03)
         self.r2.place(relx = 0.75, rely = 0.12)
         self.desconto.place(relx = 0.0, rely = 0.42)
-        self.listbox.place(relx = 0.0, rely = 0.52, relwidth = 0.987, relheight = 0.450)
+        self.listbox.place(relx = 0.0,rely = 0.52, relwidth = 0.987, relheight = 0.450)
         self.scrollbar.place(relx = 0.99, rely = 0.52, relheight = 0.450)
+        
         #clientes
-        self.frame1.place(relx = 0.0, rely = 0.0, relheight = 1.0, relwidth = 0.50)
+        self.frame1.place(relx = 0.0, rely = 0.0, relheight = 1.0, relwidth = 0.50) 
         self.cliente.place(relx = 0.02, rely = 0.16)
         self.endereco.place(relx = 0.02, rely = 0.25, relwidth = 0.94)
-        self.cidade.place(relx = 0.02, rely = 0.34)
+        self.cidade.place(relx = 0.02,rely = 0.34)
         self.cep.place(relx = 0.02, rely = 0.43)
         self.cpf.place(relx = 0.02, rely = 0.52)
         self.fone.place(relx = 0.02, rely = 0.61)
-        self.mail.place(relx = 0.02, rely = 0.71)
-        self.comp.place(relx = 0.02, rely = 0.81, relwidth = 0.94, relheight = 0.19)
+        self.mail.place(relx = 0.02,rely = 0.71)
+        self.comp.place(relx = 0.02, rely = 0.81,relwidth=0.94,relheight=0.19)
         self.botaocadastra.place(relx = 0.62, rely = 0.33, relwidth = 0.35)
-        self.botaocancela.place(relx = 0.62, rely = 0.44, relwidth = 0.35)
-        self.botao_alt_cliente.place(relx = 0.62,  rely = 0.55,  relwidth = 0.35)
-        self.frame2.place(relx = 0.50, rely = 0.0, relheight = 0.31, relwidth = 0.50)
-        self.consulta.place(relx = 0.29, rely = 0.47)
+        self.botaocancela.place(relx = 0.62,rely = 0.44, relwidth = 0.35)
+        self.botao_alt_cliente.place(relx = 0.62, rely = 0.55, relwidth = 0.35)
+        self.frame2.place(relx = 0.50, rely = 0.0, relheight = 0.31, relwidth =0.50)
+        self.consulta.place(relx = 0.29, rely = 0.47) 
         self.frame3.place(relx = 0.50, rely = 0.31, relheight = 0.69, relwidth = 0.50)
         self.mostra1.place(relx = 0.0, rely = 0.00, relheight = 1.0, relwidth = 1.0)
         #Estoque
-        self.frame4.place(relx=0.0,rely=0.00,relheight=1.0,relwidth=1.0)
-        self.pp_estoque.place(relx=0.0,rely=0.04)
-        self.p_estoque.place(relx=0.0,rely=0.14)
-        self.m_estoque.place(relx=0.0,rely=0.24)
-        self.g_estoque.place(relx=0.0,rely=0.34)
-        self.gg_estoque.place(relx=0.0,rely=0.44)
-        self.arvore.place(relx=0.0,rely=0.70,relheight=0.29,relwidth=0.990)
-        self.rolagemy.place(relx=0.990,rely=0.70,relheight=0.29)
-        self.botao_alt_produto.place(relx=0.0,rely=0.51)
-        self.botao_limpa_produto.place(relx=0.0,rely=0.61)
-        self.separador.place(relx=0.27,rely=0.0,relheight=0.70)
-        self.pp_soma.place(relx=0.28,rely=0.04)
-        self.p_soma.place(relx=0.28,rely=0.14)
-        self.m_soma.place(relx=0.28,rely=0.24)
-        self.g_soma.place(relx=0.28,rely=0.34)
-        self.gg_soma.place(relx=0.28,rely=0.44)
-        self.botao_add.place(relx=0.28,rely=0.55)
-        self.ref_estoque.place(relx=0.58,rely=0.07)
-        self.botao_pesq_produto.place(relx=0.85,rely=0.07)
-        self.botao_del_produto.place(relx=0.86,rely=0.60)
-        self.separador2.place(relx=0.573,rely=0.0,relheight=0.70)
-        #relatorios
-        self.relb1.place(relx=0.01,rely=0.002, relwidth = 0.22)
-        self.relb2.place(relx=0.01,rely=0.10, relwidth = 0.22)
-        self.relb3.place(relx=0.01,rely=0.20, relwidth = 0.22)
-        self.relb4.place(relx=0.01,rely=0.30, relwidth = 0.22)
+        self.frame4.place(relx = 0.0, rely = 0.00, relheight = 1.0, relwidth = 1.0)
+        self.pp_estoque.place(relx = 0.0, rely = 0.04)
+        self.p_estoque.place(relx = 0.0, rely = 0.14)
+        self.m_estoque.place(relx = 0.0, rely = 0.24)
+        self.g_estoque.place(relx = 0.0, rely = 0.34)
+        self.gg_estoque.place(relx = 0.0, rely = 0.44)
+        self.arvore.place(relx = 0.0, rely = 0.70, relheight = 0.29, relwidth = 0.990)
+        self.rolagemy.place(relx = 0.990, rely = 0.700, relheight = 0.29)
+        self.botao_alt_produto.place(relx = 0.0, rely = 0.52)
+        self.botao_limpa_produto.place(relx = 0.0, rely = 0.62)
+        self.separador.place(relx = 0.27, rely = 0.0, relheight = 0.70)
+        self.pp_soma.place(relx = 0.28, rely = 0.04)
+        self.p_soma.place(relx = 0.28, rely = 0.14)
+        self.m_soma.place(relx = 0.28, rely = 0.24)
+        self.g_soma.place(relx = 0.28, rely = 0.34)
+        self.gg_soma.place(relx = 0.28, rely = 0.44)
+        self.botao_add.place(relx = 0.28, rely = 0.55)
+        self.ref_estoque.place(relx = 0.58, rely = 0.07)
+        self.botao_pesq_produto.place(relx = 0.85, rely = 0.07)
+        self.botao_del_produto.place(relx = 0.86, rely = 0.62)
+        self.separador2.place(relx = 0.573, rely = 0.0, relheight = 0.70)
 
+        #relatorios
+        self.relb1.place(relx = 0.01, rely = 0.002, relwidth = 0.20)
+        self.relb2.place(relx = 0.01,rely = 0.10, relwidth = 0.20)
+        self.relb3.place(relx = 0.01, rely = 0.20, relwidth = 0.20)
+        self.relb4.place(relx = 0.01,rely = 0.30, relwidth = 0.20)
+    
         #funções diversas
         self.lista_estoque()
         self.lista_clientes()
@@ -603,14 +614,14 @@ class main:
         con.commit()
         
     def cadastraclientes(self):
-        cliente=self.cliente.get()
-        endereco=self.endereco.get()
-        cidade=self.cidade.get()
-        cep=self.cep.get()
-        cpf=self.cpf.get()
-        fone=self.fone.get()
-        mail=self.mail.get()
-        comp=self.comp.get(0.0,END)
+        cliente = self.cliente.get()
+        endereco = self.endereco.get()
+        cidade = self.cidade.get()
+        cep = self.cep.get()
+        cpf = self.cpf.get()
+        fone = self.fone.get()
+        mail = self.mail.get()
+        comp = self.comp.get(0.0,END)
         if cliente == '':
             tkMessageBox.showwarning('Aviso!',u'Você precisa preencher o campo cliente')
         elif endereco == '':
@@ -632,16 +643,16 @@ class main:
         self.lista_clientes()
 
     def limpaclientes(self):
-        self.cliente.delete(0,END)
-        self.endereco.delete(0,END)
-        self.cidade.delete(0,END)
-        self.cep.delete(0,END)
-        self.cpf.delete(0,END)
-        self.fone.delete(0,END)
-        self.mail.delete(0,END)
-        self.comp.delete(0.0,END)
-        self.mostra1.delete(0.0,END)
-        #self.consulta.delete(0,END)
+        self.cliente.delete(0, END)
+        self.endereco.delete(0, END)
+        self.cidade.delete(0, END)
+        self.cep.delete(0, END)
+        self.cpf.delete(0, END)
+        self.fone.delete(0, END)
+        self.mail.delete(0, END)
+        self.comp.delete(0.0, END)
+        self.mostra1.delete(0.0, END)
+        #self.consulta.delete(0, END)
 
     def mostraclientes(self,event):
         self.limpaclientes()
@@ -724,7 +735,7 @@ Complemento: {}'''.format(i[1],i[2],i[3],i[4],i[5],i[6],i[7],i[8]))
         for i in self.arvore.get_children():
             self.arvore.delete(i)
         #Consulta BD e preenche a lista    
-        dados=cur.execute('SELECT ref,descricao,pp,p,m,g,gg FROM produtos ORDER BY ref')
+        dados = cur.execute('SELECT ref,descricao,pp,p,m,g,gg FROM produtos ORDER BY ref')
         for item in dados:
             self.arvore.insert('','end',values=item)
         self.arvore.bind('<<TreeviewSelect>>',self.itemselect)
@@ -781,12 +792,12 @@ Complemento: {}'''.format(i[1],i[2],i[3],i[4],i[5],i[6],i[7],i[8]))
             cur.execute('SELECT * FROM produtos WHERE ref = %s'%ref_pesq)
             item = cur.fetchone()
             self.limpa_estoque()
-            self.pp_estoque.insert(END,item[4])
-            self.p_estoque.insert(END,item[5])
-            self.m_estoque.insert(END,item[6])
-            self.g_estoque.insert(END,item[7])
-            self.gg_estoque.insert(END,item[8])
-            self.consulta_ref.insert(END,item[1]) #insere descrição na combobox      
+            self.pp_estoque.insert(END, item[4]) 
+            self.p_estoque.insert(END, item[5])
+            self.m_estoque.insert(END, item[6])
+            self.g_estoque.insert(END, item[7])
+            self.gg_estoque.insert(END, item[8])
+            self.consulta_ref.insert(END, item[1]) #insere descrição na combobox      
             self.lista_estoque()
         except:
             tkMessageBox.showinfo('Aviso!',u'Referência inválida')
@@ -877,31 +888,31 @@ Complemento: {}'''.format(i[1],i[2],i[3],i[4],i[5],i[6],i[7],i[8]))
         self.lista_estoque()
 
     def zera_soma(self):
-        self.pp_soma.delete(0,END)
-        self.p_soma.delete(0,END)
-        self.m_soma.delete(0,END)
-        self.g_soma.delete(0,END)
-        self.gg_soma.delete(0,END)
-        self.pp_soma.insert(0,'0')
-        self.p_soma.insert(0,'0')
-        self.m_soma.insert(0,'0')
-        self.g_soma.insert(0,'0')
-        self.gg_soma.insert(0,'0')
+        self.pp_soma.delete(0, END)
+        self.p_soma.delete(0, END)
+        self.m_soma.delete(0, END)
+        self.g_soma.delete(0, END)
+        self.gg_soma.delete(0, END)
+        self.pp_soma.insert(0, '0')
+        self.p_soma.insert(0, '0')
+        self.m_soma.insert(0, '0')
+        self.g_soma.insert(0, '0')
+        self.gg_soma.insert(0, '0')
 
     def zera_pedido(self):
-        self.pp_quant.delete(0,END)
-        self.p_quant.delete(0,END)
-        self.m_quant.delete(0,END)
-        self.g_quant.delete(0,END)
-        self.gg_quant.delete(0,END)
-        self.pp_quant.insert(0,'0')
-        self.p_quant.insert(0,'0')
-        self.m_quant.insert(0,'0')
-        self.g_quant.insert(0,'0')
-        self.gg_quant.insert(0,'0')
+        self.pp_quant.delete(0, END)
+        self.p_quant.delete(0, END)
+        self.m_quant.delete(0, END)
+        self.g_quant.delete(0, END)
+        self.gg_quant.delete(0, END)
+        self.pp_quant.insert(0, '0')
+        self.p_quant.insert(0, '0')
+        self.m_quant.insert(0, '0')
+        self.g_quant.insert(0, '0')
+        self.gg_quant.insert(0, '0')
     def zera_desconto(self):
-        self.desconto.delete(0,END)
-        self.desconto.insert(0,'0')
+        self.desconto.delete(0, END)
+        self.desconto.insert(0, '0')
 
 #-----------------------Funções de relatórios---------------------------------------------------------------------
     def rel_mais_vendido(self):
@@ -912,16 +923,16 @@ Complemento: {}'''.format(i[1],i[2],i[3],i[4],i[5],i[6],i[7],i[8]))
     def janela_data(self):
         self.top2 = Toplevel(bg=FUNDO_1)
         #self.top2.geometry("500 x 700")
+ 
+        Label(self.top2,text = 'Data inicial',bg = FUNDO_1,font = ('Arial','14')).place(relx = 0.0,rely = 0.00)
+        self.rel_data_inicial = MaskedWidget(self.top2, 'fixed', font = ("Ariel","14"), width = 18, mask = "99/99/9999")
+        self.rel_data_inicial.place(relx = 0.0,rely=0.15)
+        Label(self.top2,text = 'Data final',bg = FUNDO_1, font = ('Arial','14')).place(relx = 0.0,rely = 0.35)
+        self.rel_data_final = MaskedWidget(self.top2, 'fixed', font = ("Ariel","14"), width = 18, mask = "99/99/9999")
+        self.rel_data_final.place(relx = 0.0, rely = 0.48)
 
-        Label(self.top2,text='Data inicial',bg=FUNDO_1,font=('Arial','14')).place(relx=0.0,rely=0.00)
-        self.rel_data_inicial = MaskedWidget(self.top2, 'fixed', font=("Ariel","14"), width=18, mask="99/99/9999")
-        self.rel_data_inicial.place(relx=0.0,rely=0.15)
-        Label(self.top2,text='Data final',bg=FUNDO_1,font=('Arial','14')).place(relx=0.0,rely=0.35)
-        self.rel_data_final = MaskedWidget(self.top2, 'fixed', font=("Ariel","14"), width=18, mask="99/99/9999")
-        self.rel_data_final.place(relx=0.0,rely=0.48)
-
-        botao = Button(self.top2,text='OK',fg='green',font=('Arial','14'),
-                       command=self.rel_data).place(relx=0.25,rely=0.70,width=100)
+        botao = Button(self.top2,text = 'OK', fg = 'green', font = ('Arial','14'),
+                       command = self.rel_data).place(relx = 0.25, rely = 0.70, width = 100)
 
     def rel_data(self):
         datai = self.rel_data_inicial.get()
@@ -934,25 +945,25 @@ Complemento: {}'''.format(i[1],i[2],i[3],i[4],i[5],i[6],i[7],i[8]))
         subprocess.call(['notepad', 'relatorios/pordata.txt']) #Relatorio no notepad do windows
 
     def janela_vend_data(self):
-        self.top3 = Toplevel(bg=FUNDO_1)
+        self.top3 = Toplevel(bg = FUNDO_1)
         self.top3.geometry("%dx%d" %(200,300))
-        Label(self.top3,text='Vendedor',bg=FUNDO_1,font=('Arial','14')).place(relx=0.22,rely=0.02)
-        self.box_vendedor2= AutocompleteCombobox(self.top3,font=("Ariel","14"),width=10)
+        Label(self.top3,text = 'Vendedor', bg = FUNDO_1, font = ('Arial','14')).place(relx = 0.22, rely = 0.02)
+        self.box_vendedor2 = AutocompleteCombobox(self.top3, font = ("Ariel","14"), width = 10)
         cur.execute("SELECT vendedor FROM vendedores ORDER BY vendedor")
         listav = cur.fetchall()
         listav = [cli[0] for cli in listav]
         self.box_vendedor2.set_completion_list(listav)
-        self.box_vendedor2.place(relx=0.20,rely=0.10)
+        self.box_vendedor2.place(relx = 0.20, rely = 0.10)
 
-        Label(self.top3,text='Data inicial',bg=FUNDO_1,font=('Arial','14')).place(relx=0.20, rely=0.30)
-        self.rel_data_inicial2 = MaskedWidget(self.top3, 'fixed', font=("Ariel","14"), width=18, mask="99/99/9999")
-        self.rel_data_inicial2.place(relx=0.0, rely=0.40)
-        Label(self.top3,text='Data final',bg=FUNDO_1,font=('Arial','14')).place(relx=0.20, rely=0.60)
-        self.rel_data_final2 = MaskedWidget(self.top3, 'fixed', font=("Ariel","14"), width=18, mask="99/99/9999")
-        self.rel_data_final2.place(relx=0.0, rely=0.68)
+        Label(self.top3, text = 'Data inicial', bg = FUNDO_1, font = ('Arial','14')).place(relx = 0.20, rely = 0.30)
+        self.rel_data_inicial2 = MaskedWidget(self.top3, 'fixed', font = ("Ariel","14"), width = 18, mask = "99/99/9999")
+        self.rel_data_inicial2.place(relx = 0.0, rely = 0.40)
+        Label(self.top3,text = 'Data final', bg = FUNDO_1, font = ('Arial','14')).place(relx = 0.20, rely = 0.60)
+        self.rel_data_final2 = MaskedWidget(self.top3, 'fixed', font = ("Ariel","14"), width =18, mask = "99/99/9999")
+        self.rel_data_final2.place(relx = 0.0, rely = 0.68)
 
-        botao = Button(self.top3,text='OK',fg='green',font=('Arial','14'),
-                       command=self.rel_data_vend).place(relx=0.25,rely=0.85,width=100)
+        botao = Button(self.top3,text = 'OK',fg = 'green',font = ('Arial','14'),
+                       command = self.rel_data_vend).place(relx = 0.25, rely = 0.85, width = 100)
 
     def rel_data_vend(self):
         vend = self.box_vendedor2.get()
@@ -966,23 +977,23 @@ Complemento: {}'''.format(i[1],i[2],i[3],i[4],i[5],i[6],i[7],i[8]))
         subprocess.call(['notepad', 'relatorios/pordata_e_vendedor.txt']) #Relatorio no notepad do windows
 
     def janela_rel_cliente(self):
-        self.top4 = Toplevel(bg=FUNDO_1)
+        self.top4 = Toplevel(bg = FUNDO_1)
         self.top4.geometry("%dx%d" %(200,300))
-        Label(self.top4,text='Cliente',bg=FUNDO_1,font=('Arial','14')).place(relx=0.22,rely=0.02)
-        self.box_cliente= AutocompleteCombobox(self.top4,font=("Ariel","14"),width=10)
+        Label(self.top4,text = 'Cliente', bg = FUNDO_1, font = ('Arial','14')).place(relx = 0.22, rely = 0.02)
+        self.box_cliente = AutocompleteCombobox(self.top4, font = ("Ariel","14"), width = 10)
              
         self.box_cliente.set_completion_list(self.clientes) #Dados vindos da função lista_clientes
-        self.box_cliente.place(relx=0.20,rely=0.10)
+        self.box_cliente.place(relx = 0.20, rely = 0.10)
 
-        Label(self.top4,text='Data inicial',bg=FUNDO_1,font=('Arial','14')).place(relx=0.20, rely=0.30)
-        self.rel_data_inicial3 = MaskedWidget(self.top4, 'fixed', font=("Ariel","14"), width=18, mask="99/99/9999")
-        self.rel_data_inicial3.place(relx=0.0, rely=0.40)
-        Label(self.top4,text='Data final',bg=FUNDO_1,font=('Arial','14')).place(relx=0.20, rely=0.60)
-        self.rel_data_final3 = MaskedWidget(self.top4, 'fixed', font=("Ariel","14"), width=18, mask="99/99/9999")
-        self.rel_data_final3.place(relx=0.0, rely=0.68)
+        Label(self.top4,text = 'Data inicial', bg = FUNDO_1, font = ('Arial','14')).place(relx = 0.20, rely = 0.30)
+        self.rel_data_inicial3 = MaskedWidget(self.top4, 'fixed', font = ("Ariel","14"), width = 18, mask = "99/99/9999")
+        self.rel_data_inicial3.place(relx = 0.0, rely = 0.40)
+        Label(self.top4,text = 'Data final', bg = FUNDO_1, font = ('Arial','14')).place(relx = 0.20, rely = 0.60)
+        self.rel_data_final3 = MaskedWidget(self.top4, 'fixed', font = ("Ariel","14"), width =18, mask = "99/99/9999")
+        self.rel_data_final3.place(relx = 0.0, rely = 0.68)
 
-        botao = Button(self.top4,text='OK',fg='green',font=('Arial','14'),
-                       command=self.rel_cliente).place(relx=0.25,rely=0.85,width=100) 
+        botao = Button(self.top4,text ='OK', fg = 'green', font = ('Arial','14'),
+                       command = self.rel_cliente).place(relx = 0.25, rely = 0.85, width = 100) 
 
     def rel_cliente(self):
         cliente = self.box_cliente.get()
@@ -1015,7 +1026,7 @@ Complemento: {}'''.format(i[1],i[2],i[3],i[4],i[5],i[6],i[7],i[8]))
             else:
                 tkMessageBox.showwarning('Aviso!', u'Senha inválida')
         except:
-            tkMessageBox.showwarning('Aviso!', u'Usuário inválido')
+            tkMessageBox.showwarning('Aviso!', u'Usuário inválido')        
 
 
     def autentica2(self,event):

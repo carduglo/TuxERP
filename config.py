@@ -1,0 +1,1 @@
+FUNDO_1 = 'gray'

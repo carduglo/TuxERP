@@ -18,15 +18,16 @@ def relvendedor(vendedor):
 	cursor.execute("SELECT * FROM vendas WHERE vendedor = '%s'" %vendedor)
 	resultado = cursor.fetchall()
 	outfile = open('vendedor.txt','w')
-	cabecalho = u'Data.........Ref.......Quantidade.....Descricao..................Preco.....Total \n\n'
+	cabecalho = u'Data........Ref.......Quantidade.....Descricao................Preco.....Total \n\n'
 	outfile.write(cabecalho)
 	for i in resultado:
-		i=(u"{:.<13}{:.<10d}{:.<15}{:.<27}{:.<10.2f}{:.2f}\n" .format(i[0],i[1],i[2],i[3],i[4],i[5]))
+		i=(u"{:.<12}{:.<10d}{:.<15}{:.<25}{:.<10.2f}{:.2f}\n" .format(i[0],i[1],i[2],i[3],i[4],i[5]))
 		outfile.write(i.encode('utf-8'))
 	cursor.execute("SELECT SUM(total)FROM vendas WHERE vendedor = '%s'" %vendedor)
 	total = float(cursor.fetchone()[0])
-	total = "\n\nTotal:..................................................................R$ %.2f" %total
+	total = "\n\nTotal:.............................................................R$ %.2f" %total
 	outfile.write(total)
+	outfile.close()
 	
 def reldata(datai, dataf):
 	'''Função relatório por datas
@@ -35,15 +36,16 @@ def reldata(datai, dataf):
 	cursor.execute(" SELECT * FROM vendas WHERE data BETWEEN '%s' AND '%s' "%(datai,dataf))
 	resultado = cursor.fetchall()
 	outfile = open('pordata.txt','w')
-	cabecalho = u'Data.........Ref.......Quantidade.....Descricao..................Preco.....Total \n\n'
-	outfile.write(cabecalho)
+	cabecalho = u'Data........Ref.......Quantidade.....Descrição................Preço.....Total \n\n'
+	outfile.write(cabecalho.encode('utf-8'))
 	for i in resultado:
-		i=(u"{:.<13}{:.<10d}{:.<15}{:.<27}{:.<10.2f}{:.2f}\n" .format(i[0],i[1],i[2],i[3],i[4],i[5]))
+		i=(u"{:.<12}{:.<10d}{:.<15}{:.<25}{:.<10.2f}{:.2f}\n" .format(i[0],i[1],i[2],i[3],i[4],i[5]))
 		outfile.write(i.encode('utf-8'))
 	cursor.execute("SELECT SUM(total)FROM vendas WHERE data BETWEEN '%s' AND '%s' "%(datai,dataf))
 	total = float(cursor.fetchone()[0])
-	total = "\n\nTotal:..................................................................R$ %.2f" %total
+	total = "\n\nTotal:.............................................................R$ %.2f" %total
 	outfile.write(total)
+	outfile.close()
 
 def reldatavend(datai, dataf, vendedor):
 	'''Função relatório por datas
@@ -52,15 +54,16 @@ def reldatavend(datai, dataf, vendedor):
 	cursor.execute(" SELECT * FROM vendas WHERE data BETWEEN '%s' AND '%s' AND vendedor = '%s' "%(datai,dataf,vendedor))
 	resultado = cursor.fetchall()
 	outfile = open('pordata_e_vendedor.txt','w')
-	cabecalho = u'Data.........Ref.......Quantidade.....Descricao..................Preco.....Total \n\n'
-	outfile.write(cabecalho)
+	cabecalho = u'Data........Ref.......Quantidade.....Descrição................Preço.....Total \n\n'
+	outfile.write(cabecalho.encode('utf-8'))
 	for i in resultado:
-		i=(u"{:.<13}{:.<10d}{:.<15}{:.<27}{:.<10.2f}{:.2f}\n" .format(i[0],i[1],i[2],i[3],i[4],i[5]))
+		i=(u"{:.<12}{:.<10d}{:.<15}{:.<25}{:.<10.2f}{:.2f}\n" .format(i[0],i[1],i[2],i[3],i[4],i[5]))
 		outfile.write(i.encode('utf-8'))
 	cursor.execute("SELECT SUM(total)FROM vendas WHERE data BETWEEN '%s' AND '%s' AND vendedor = '%s' "%(datai,dataf,vendedor))
 	total = float(cursor.fetchone()[0])
-	total = "\n\nTotal:..................................................................R$ %.2f" %total
+	total = "\n\nTotal:.............................................................R$ %.2f" %total
 	outfile.write(total)
+	outfile.close()
 
 def relcliente(datai, dataf, cliente):
 	'''Função relatório por datas
@@ -69,15 +72,16 @@ def relcliente(datai, dataf, cliente):
 	cursor.execute("SELECT * FROM vendas WHERE data BETWEEN '%s' AND '%s' AND cliente = '%s'" %(datai, dataf, cliente))
 	resultado = cursor.fetchall()
 	outfile = open('porcliente.txt', 'w')
-	cabecalho = u'CLIENTE = %s \n\nData.........Ref.......Quantidade.....Descricao..................Preco.....Total \n\n' %(cliente)
-	outfile.write(cabecalho)
+	cabecalho = u'CLIENTE = %s \n\nData........Ref.......Quantidade.....Descrição................Preço.....Total \n\n' %(cliente)
+	outfile.write(cabecalho.encode('utf-8'))
 	for i in resultado:
-		i=(u"{:.<13}{:.<10d}{:.<15}{:.<27}{:.<10.2f}{:.2f}\n" .format(i[0],i[1],i[2],i[3],i[4],i[5]))
+		i=(u"{:.<12}{:.<10d}{:.<15}{:.<25}{:.<10.2f}{:.2f}\n" .format(i[0],i[1],i[2],i[3],i[4],i[5]))
 		outfile.write(i.encode('utf-8'))
 	cursor.execute("SELECT SUM(total)FROM vendas WHERE data BETWEEN '%s' AND '%s' AND cliente = '%s' "%(datai, dataf, cliente))
 	total = float(cursor.fetchone()[0])
-	total = "\n\nTotal:..................................................................R$ %.2f" %total
+	total = "\n\nTotal:.............................................................R$ %.2f" %total
 	outfile.write(total)
+	outfile.close()
 
 def mais_vendido():
 	cursor.execute('''SELECT ref, descricao,
@@ -86,15 +90,17 @@ def mais_vendido():
 					 SUM(m),
 					 SUM(g),
 					 SUM(gg),
-					 SUM(total)
-					 FROM vendas GROUP BY ref ORDER BY SUM (total) DESC''')
+					 SUM(quant)
+					 FROM vendas GROUP BY ref ORDER BY SUM (quant) DESC''')
 	resultado = cursor.fetchall()
 	outfile = open('mais_vendido.txt', 'w')
+	cabecalho = u'Ref...Descrição...........PP........P.........M.........G.........GG.......Total\n\n'
+	outfile.write(cabecalho.encode('utf-8'))
 	for i in resultado:
-		i = (u"{:.<5}{:.<20}{:.<10}{:.<10}{:.<10}{:.<10}{:.<10}{}\n" .format(i[0],i[1],i[2],i[3],i[4],i[5],i[6],i[7]))
+		i = (u"{:.<6}{:.<20}{:.<10}{:.<10}{:.<10}{:.<10}{:.<9}{}\n" .format(i[0],i[1],i[2],i[3],i[4],i[5],i[6],i[7]))
 		outfile.write(i.encode('utf-8'))
 	outfile.close()
 
 if __name__ == '__main__':
 	pass
-	#relcliente('01-11-2014', '21-11-2014', 'Dino da Silva Sauro')
+	#relcliente('2014-10-01', '2014-10-31', 'Dino da Silva Sauro')
