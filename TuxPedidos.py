@@ -436,32 +436,32 @@ class main:
         self.frame3.place(relx = 0.50, rely = 0.31, relheight = 0.69, relwidth = 0.50)
         self.mostra1.place(relx = 0.0, rely = 0.00, relheight = 1.0, relwidth = 1.0)
         #Estoque
-        self.frame4.place(relx=0.0,rely=0.00,relheight=1.0,relwidth=1.0)
-        self.pp_estoque.place(relx=0.0,rely=0.04)
-        self.p_estoque.place(relx=0.0,rely=0.14)
-        self.m_estoque.place(relx=0.0,rely=0.24)
-        self.g_estoque.place(relx=0.0,rely=0.34)
-        self.gg_estoque.place(relx=0.0,rely=0.44)
-        self.arvore.place(relx=0.0,rely=0.70,relheight=0.29,relwidth=0.990)
-        self.rolagemy.place(relx=0.990,rely=0.70,relheight=0.29)
-        self.botao_alt_produto.place(relx=0.0,rely=0.51)
-        self.botao_limpa_produto.place(relx=0.0,rely=0.61)
-        self.separador.place(relx=0.27,rely=0.0,relheight=0.70)
-        self.pp_soma.place(relx=0.28,rely=0.04)
-        self.p_soma.place(relx=0.28,rely=0.14)
-        self.m_soma.place(relx=0.28,rely=0.24)
-        self.g_soma.place(relx=0.28,rely=0.34)
-        self.gg_soma.place(relx=0.28,rely=0.44)
-        self.botao_add.place(relx=0.28,rely=0.55)
-        self.ref_estoque.place(relx=0.58,rely=0.07)
-        self.botao_pesq_produto.place(relx=0.85,rely=0.07)
-        self.botao_del_produto.place(relx=0.86,rely=0.60)
-        self.separador2.place(relx=0.573,rely=0.0,relheight=0.70)
+        self.frame4.place(relx = 0.0, rely = 0.00, relheight = 1.0, relwidth = 1.0)
+        self.pp_estoque.place(relx = 0.0, rely = 0.04)
+        self.p_estoque.place(relx = 0.0, rely = 0.14)
+        self.m_estoque.place(relx = 0.0, rely = 0.24)
+        self.g_estoque.place(relx = 0.0, rely = 0.34)
+        self.gg_estoque.place(relx = 0.0, rely = 0.44)
+        self.arvore.place(relx = 0.0, rely = 0.70, relheight = 0.29, relwidth = 0.990)
+        self.rolagemy.place(relx = 0.990, rely = 0.70, relheight = 0.29)
+        self.botao_alt_produto.place(relx = 0.0, rely = 0.51)
+        self.botao_limpa_produto.place(relx = 0.0, rely = 0.61)
+        self.separador.place(relx = 0.27, rely = 0.0, relheight = 0.70)
+        self.pp_soma.place(relx = 0.28, rely = 0.04)
+        self.p_soma.place(relx = 0.28, rely = 0.14)
+        self.m_soma.place(relx = 0.28, rely = 0.24)
+        self.g_soma.place(relx = 0.28, rely = 0.34)
+        self.gg_soma.place(relx = 0.28, rely = 0.44)
+        self.botao_add.place(relx = 0.28, rely = 0.55)
+        self.ref_estoque.place(relx = 0.58, rely = 0.07)
+        self.botao_pesq_produto.place(relx = 0.85, rely = 0.07)
+        self.botao_del_produto.place(relx = 0.86, rely = 0.60)
+        self.separador2.place(relx = 0.573, rely = 0.0, relheight = 0.70)
         #relatorios
-        self.relb1.place(relx=0.01,rely=0.002, relwidth = 0.22)
-        self.relb2.place(relx=0.01,rely=0.10, relwidth = 0.22)
-        self.relb3.place(relx=0.01,rely=0.20, relwidth = 0.22)
-        self.relb4.place(relx=0.01,rely=0.30, relwidth = 0.22)
+        self.relb1.place(relx = 0.01, rely = 0.002, relwidth = 0.22)
+        self.relb2.place(relx = 0.01, rely = 0.10, relwidth = 0.22)
+        self.relb3.place(relx = 0.01, rely = 0.20, relwidth = 0.22)
+        self.relb4.place(relx = 0.01, rely = 0.30, relwidth = 0.22)
 
         #funções diversas
         self.lista_estoque()
@@ -471,7 +471,10 @@ class main:
         self.zera_desconto()
         self.ver_adm()
         
-#===================================================Funções============================================================                
+#===================================================Funções============================================================
+
+
+#--------------------------------------------------Funções de cadastro-------------------------------------------------                
     #Função Cadastra produto
     def cadastra(self):
         """Cadastra novos produtos"""
@@ -480,21 +483,21 @@ class main:
         precov = self.precov.get()
         precoa = self.precoa.get()
         if ref == '':
-            tkMessageBox.showwarning('Aviso!',u'Você precisa preencher o campo referência')
+            tkMessageBox.showwarning('Aviso!', u'Você precisa preencher o campo referência')
         elif desc == '':
-            tkMessageBox.showwarning('Aviso!',u'Você precisa preencher o campo descrição')
+            tkMessageBox.showwarning('Aviso!', u'Você precisa preencher o campo descrição')
         elif precov == '':
-            tkMessageBox.showwarning('Aviso!',u'Você precisa preencher o campo preço varejo')
+            tkMessageBox.showwarning('Aviso!', u'Você precisa preencher o campo preço varejo')
         elif precoa == '':
-            tkMessageBox.showwarning('Aviso!',u'Você precisa preencher o campo preço atacado')
+            tkMessageBox.showwarning('Aviso!', u'Você precisa preencher o campo preço atacado')
         else:
             qt = 0
             try:
-                cur.execute("INSERT INTO produtos VALUES(?,?,?,?,?,?,?,?,?)",(ref,desc,precov,precoa,qt,qt,qt,qt,qt))
+                cur.execute("INSERT INTO produtos VALUES(?,?,?,?,?,?,?,?,?)", (ref, desc, precov, precoa, qt, qt, qt, qt, qt))
                 self.cancela_cadastro()
-                tkMessageBox.showinfo('Aviso!',u'Produto cadastrado com sucesso')
+                tkMessageBox.showinfo('Aviso!', u'Produto cadastrado com sucesso')
             except:
-                tkMessageBox.showinfo('Aviso!',u'Referência já existente, ou valor inválido')
+                tkMessageBox.showinfo('Aviso!', u'Referência já existente, ou valor inválido')
             con.commit()
             self.lista_estoque()
             self.lista_referencia()
@@ -502,46 +505,73 @@ class main:
 
     #Função Cancela cadastro
     def cancela_cadastro(self):
-        self.ref_c.delete(0,END)
-        self.desc_c.delete(0,END)
-        self.precov.delete(0,END)
-        self.precoa.delete(0,END)
+        self.ref_c.delete(0, END)
+        self.desc_c.delete(0, END)
+        self.precov.delete(0, END)
+        self.precoa.delete(0, END)
 
-    def lista_clientes(self):
-        cur.execute("SELECT cl FROM clientes ORDER BY cl")
-        self.clientes = cur.fetchall()
-        self.clientes = [cli[0] for cli in self.clientes]
-        self.consulta.set_completion_list(self.clientes)
-        self.venda_cliente.set_completion_list(self.clientes)        
+    def cadastraclientes(self):
+        cliente=self.cliente.get()
+        endereco=self.endereco.get()
+        cidade=self.cidade.get()
+        cep=self.cep.get()
+        cpf=self.cpf.get()
+        fone=self.fone.get()
+        mail=self.mail.get()
+        comp=self.comp.get(0.0,END)
+        if cliente == '':
+            tkMessageBox.showwarning('Aviso!',u'Você precisa preencher o campo cliente')
+        elif endereco == '':
+            tkMessageBox.showwarning('Aviso!',u'Você precisa preencher o campo endereço')
+        elif cidade == '':
+            tkMessageBox.showwarning('Aviso!',u'Você precisa preencher o campo cidade')
+        elif fone == '':
+            tkMessageBox.showwarning('Aviso!',u'Você precisa preencher o campo telefone')
+        else:
+            cur.execute("INSERT INTO clientes VALUES(?,?,?,?,?,?,?,?,?)",
+                        (None,cliente,endereco,cidade,cep,cpf,fone,mail,comp))
+            con.commit()
+            self.limpaclientes()
+            tkMessageBox.showinfo('Aviso!',u'Cliente cadastrado com sucesso')
+            cur.execute("SELECT cl FROM clientes ORDER BY cl")
+            self.col = cur.fetchall()
+            self.col = [cli[0] for cli in self.col]
+            self.consulta["values"] = self.col
+        self.lista_clientes()
 
-    def lista_referencia(self):
-        self.consulta_ref= AutocompleteCombobox(self.frame4,font=("Ariel","18"))
-        cur.execute("SELECT descricao FROM produtos ORDER BY descricao")
-        self.col = cur.fetchall()
-        self.col = [cli[0] for cli in self.col]
-        self.consulta_ref.set_completion_list(self.col)
-        self.consulta_ref.bind("<<ComboboxSelected>>",self.consulta_referencia)
-        self.consulta_ref.bind("<Return>",self.consulta_referencia)
-        self.consulta_ref.bind("<KP_Enter>",self.mostraclientes)
-        self.consulta_ref.place(relx=0.58,rely=0.20)
+    def limpaclientes(self):
+        self.cliente.delete(0,END)
+        self.endereco.delete(0,END)
+        self.cidade.delete(0,END)
+        self.cep.delete(0,END)
+        self.cpf.delete(0,END)
+        self.fone.delete(0,END)
+        self.mail.delete(0,END)
+        self.comp.delete(0.0,END)
+        self.mostra1.delete(0.0,END)
+        #self.consulta.delete(0,END)
 
-    def lista_vendedores(self):
-        self.vendedor= AutocompleteCombobox(self.abas_pg1,font=("Ariel","18"),width=7)
-        cur.execute("SELECT vendedor FROM vendedores ORDER BY vendedor")
-        listav = cur.fetchall()
-        listav = [cli[0] for cli in listav]
-        self.vendedor.set_completion_list(listav)
-        self.vendedor.place(relx=0.0,rely=0.07)     
+    def cadastra_vendedor(self):
+        vendedor = self.vend_c.get()
+        senhac = self.senha_c.get()
+        if vendedor == '':
+            tkMessageBox.showwarning('Aviso!',u'Você precisa preencher o campo vendedor')
+        elif senhac == '':
+            tkMessageBox.showwarning('Aviso!',u'Você precisa preencher o campo senha')
+        else:
+            try:
+                cur.execute("INSERT INTO vendedores VALUES(?,?)",
+                        (vendedor,senhac))
+                tkMessageBox.showwarning('Aviso!',u'Vendedor cadastardo com sucesso.')
+                con.commit()
+            except:
+                tkMessageBox.showwarning('Erro!',u'Vendedor já cadastardo ou inválido.')
+        self.vend_c.delete(0,END)
+        self.senha_c.delete(0,END)
+        self.lista_vendedores()   
 
-    def consulta_referencia(self,event):
-        self.ref_estoque.delete(0,END)
-        desc_pesq = self.consulta_ref.get()
-        cur.execute('SELECT ref FROM produtos WHERE descricao = "%s"' %desc_pesq)
-        item = cur.fetchone()
-        self.ref_estoque.insert(END,item)
-        self.pesquisa_referencia()
-        
-                
+#---------------------------------------------------Funções de venda------------------------------------------------
+
     #Função pedido
     def pedido(self):      
         ref = self.ref.get() #Pega o valor da referencia digitado
@@ -601,47 +631,37 @@ class main:
         self.totalp.delete(0,END)#Apaga campo Total do Pedido
         self.zera_desconto()
         con.commit()
-        
-    def cadastraclientes(self):
-        cliente=self.cliente.get()
-        endereco=self.endereco.get()
-        cidade=self.cidade.get()
-        cep=self.cep.get()
-        cpf=self.cpf.get()
-        fone=self.fone.get()
-        mail=self.mail.get()
-        comp=self.comp.get(0.0,END)
-        if cliente == '':
-            tkMessageBox.showwarning('Aviso!',u'Você precisa preencher o campo cliente')
-        elif endereco == '':
-            tkMessageBox.showwarning('Aviso!',u'Você precisa preencher o campo endereço')
-        elif cidade == '':
-            tkMessageBox.showwarning('Aviso!',u'Você precisa preencher o campo cidade')
-        elif fone == '':
-            tkMessageBox.showwarning('Aviso!',u'Você precisa preencher o campo telefone')
-        else:
-            cur.execute("INSERT INTO clientes VALUES(?,?,?,?,?,?,?,?,?)",
-                        (None,cliente,endereco,cidade,cep,cpf,fone,mail,comp))
-            con.commit()
-            self.limpaclientes()
-            tkMessageBox.showinfo('Aviso!',u'Cliente cadastrado com sucesso')
-            cur.execute("SELECT cl FROM clientes ORDER BY cl")
-            self.col = cur.fetchall()
-            self.col = [cli[0] for cli in self.col]
-            self.consulta["values"] = self.col
-        self.lista_clientes()
 
-    def limpaclientes(self):
-        self.cliente.delete(0,END)
-        self.endereco.delete(0,END)
-        self.cidade.delete(0,END)
-        self.cep.delete(0,END)
-        self.cpf.delete(0,END)
-        self.fone.delete(0,END)
-        self.mail.delete(0,END)
-        self.comp.delete(0.0,END)
-        self.mostra1.delete(0.0,END)
-        #self.consulta.delete(0,END)
+    #Função Imprimir
+    def imprimir(self):
+        outfile = open('outfile.txt','w')
+        cabecalho = '''------------------------------------LINE FITNESS-------------------------------------
+---------------------------E-mail: linefitness2014@gmail.com-------------------------
+--------------------------------Fone: (47) 9682 6062---------------------------------'''
+        outfile.write(cabecalho+'\n\n\n')
+        tb=self.listbox.get(0,END)        
+        for i in tb: 
+            i=(u"{}\n" .format(i))
+            outfile.write(i.encode('utf-8'))
+        totalprint = "Total do Pedido:" + 57*'-'+ str(self.totalp.get())
+        outfile.write('\n\n'+totalprint)
+        outfile.close()
+        #subprocess.call(['notepad.exe','/p','outfile.txt'])*2 #versão notepad windows
+        #subprocess.call(['swriter','outfile.txt']) #Linux writer
+        self.diminui_estoque()
+        self.cadastra_venda()
+        self.cancela()
+        self.lista_estoque()
+
+#-------------------------------Consulta de clientes---------------------------------------------------        
+
+    def lista_clientes(self):
+        cur.execute("SELECT cl FROM clientes ORDER BY cl")
+        self.clientes = cur.fetchall()
+        self.clientes = [cli[0] for cli in self.clientes]
+        self.consulta.set_completion_list(self.clientes)
+        self.venda_cliente.set_completion_list(self.clientes)        
+   
 
     def mostraclientes(self,event):
         self.limpaclientes()
@@ -695,30 +715,61 @@ Complemento: {}'''.format(i[1],i[2],i[3],i[4],i[5],i[6],i[7],i[8]))
                         (cliente,endereco,cidade,cep,cpf,fone,mail,comp,i))
             con.commit()
             self.limpaclientes()
-            tkMessageBox.showinfo('Aviso!',u'Cliente alterado com sucesso')    
-            
-    #Função Imprimir
-    def imprimir(self):
-        outfile = open('outfile.txt','w')
-        cabecalho = '''------------------------------------LINE FITNESS-------------------------------------
----------------------------E-mail: linefitness2014@gmail.com-------------------------
---------------------------------Fone: (47) 9682 6062---------------------------------'''
-        outfile.write(cabecalho+'\n\n\n')
-        tb=self.listbox.get(0,END)        
-        for i in tb: 
-            i=(u"{}\n" .format(i))
-            outfile.write(i.encode('utf-8'))
-        totalprint = "Total do Pedido:" + 57*'-'+ str(self.totalp.get())
-        outfile.write('\n\n'+totalprint)
-        outfile.close()
-        #subprocess.call(['notepad.exe','/p','outfile.txt'])*2 #versão notepad windows
-        #subprocess.call(['swriter','outfile.txt']) #Linux writer
-        self.diminui_estoque()
-        self.cadastra_venda()
-        self.cancela()
-        self.lista_estoque()        
+            tkMessageBox.showinfo('Aviso!',u'Cliente alterado com sucesso')
+
+
+    def lista_vendedores(self):
+
+        ''' Combobox para consulta de vendedores'''
+
+        self.vendedor= AutocompleteCombobox(self.abas_pg1,font=("Ariel","18"),width=7)
+        cur.execute("SELECT vendedor FROM vendedores ORDER BY vendedor")
+        listav = cur.fetchall()
+        listav = [cli[0] for cli in listav]
+        self.vendedor.set_completion_list(listav)
+        self.vendedor.place(relx=0.0,rely=0.07)   
         
 #-------------------------------------Funções de Estoque----------------------------------------------------
+    def lista_referencia(self):
+        ''' Função da combobox de descrição no estoque'''
+        self.consulta_ref= AutocompleteCombobox(self.frame4,font=("Ariel","18"))
+        cur.execute("SELECT descricao FROM produtos ORDER BY descricao")
+        self.col = cur.fetchall()
+        self.col = [cli[0] for cli in self.col]
+        self.consulta_ref.set_completion_list(self.col)
+        self.consulta_ref.bind("<<ComboboxSelected>>",self.consulta_referencia)
+        self.consulta_ref.bind("<Return>",self.consulta_referencia)
+        self.consulta_ref.bind("<KP_Enter>",self.mostraclientes)
+        self.consulta_ref.place(relx=0.58,rely=0.20)
+
+
+    def consulta_referencia(self,event):
+        self.ref_estoque.delete(0,END)
+        desc_pesq = self.consulta_ref.get()
+        cur.execute('SELECT ref FROM produtos WHERE descricao = "%s"' %desc_pesq)
+        item = cur.fetchone()
+        self.ref_estoque.insert(END,item)
+        self.pesquisa_referencia()
+
+    def pesquisa_referencia_bind(self, event):
+        self.pesquisa_referencia()
+
+    def pesquisa_referencia(self):
+        ref_pesq = self.ref_estoque.get()
+        try:
+            cur.execute('SELECT * FROM produtos WHERE ref = %s'%ref_pesq)
+            item = cur.fetchone()
+            self.limpa_estoque2() # Limpa os campos, menos referencia
+            self.pp_estoque.insert(END,item[4])
+            self.p_estoque.insert(END,item[5])
+            self.m_estoque.insert(END,item[6])
+            self.g_estoque.insert(END,item[7])
+            self.gg_estoque.insert(END,item[8])
+            self.consulta_ref.insert(END,item[1]) #insere descrição na combobox      
+            self.lista_estoque()
+        except:
+            tkMessageBox.showinfo('Aviso!',u'Referência inválida')
+
     def lista_estoque(self):
         #Limpar lista
         for i in self.arvore.get_children():
@@ -754,6 +805,16 @@ Complemento: {}'''.format(i[1],i[2],i[3],i[4],i[5],i[6],i[7],i[8]))
         self.g_estoque.delete(0,END)
         self.gg_estoque.delete(0,END)
         self.consulta_ref.delete(0,END)
+
+    def limpa_estoque2(self):
+        #Limpa os campos, menos referencia
+        #self.ref_estoque.delete(0,END)
+        self.pp_estoque.delete(0,END)
+        self.p_estoque.delete(0,END)
+        self.m_estoque.delete(0,END)
+        self.g_estoque.delete(0,END)
+        self.gg_estoque.delete(0,END)
+        self.consulta_ref.delete(0,END)
         
     def alterar_produto(self):
         indice = self.ref_estoque.get()
@@ -772,24 +833,7 @@ Complemento: {}'''.format(i[1],i[2],i[3],i[4],i[5],i[6],i[7],i[8]))
         con.commit()
         self.lista_estoque()
 
-    def pesquisa_referencia_bind(self, event):
-        self.pesquisa_referencia()
-
-    def pesquisa_referencia(self):
-        ref_pesq = self.ref_estoque.get()
-        try:
-            cur.execute('SELECT * FROM produtos WHERE ref = %s'%ref_pesq)
-            item = cur.fetchone()
-            self.limpa_estoque()
-            self.pp_estoque.insert(END,item[4])
-            self.p_estoque.insert(END,item[5])
-            self.m_estoque.insert(END,item[6])
-            self.g_estoque.insert(END,item[7])
-            self.gg_estoque.insert(END,item[8])
-            self.consulta_ref.insert(END,item[1]) #insere descrição na combobox      
-            self.lista_estoque()
-        except:
-            tkMessageBox.showinfo('Aviso!',u'Referência inválida')
+    
        
     def somar_estoque(self):
         indice = self.ref_estoque.get()
@@ -850,24 +894,7 @@ Complemento: {}'''.format(i[1],i[2],i[3],i[4],i[5],i[6],i[7],i[8]))
                          i[7],i[8],i[9],i[10],i[11],i[12]))
         con.commit()
 
-    def cadastra_vendedor(self):
-        vendedor = self.vend_c.get()
-        senhac = self.senha_c.get()
-        if vendedor == '':
-            tkMessageBox.showwarning('Aviso!',u'Você precisa preencher o campo vendedor')
-        elif senhac == '':
-            tkMessageBox.showwarning('Aviso!',u'Você precisa preencher o campo senha')
-        else:
-            try:
-                cur.execute("INSERT INTO vendedores VALUES(?,?)",
-                        (vendedor,senhac))
-                tkMessageBox.showwarning('Aviso!',u'Vendedor cadastardo com sucesso.')
-                con.commit()
-            except:
-                tkMessageBox.showwarning('Erro!',u'Vendedor já cadastardo ou inválido.')
-        self.vend_c.delete(0,END)
-        self.senha_c.delete(0,END)
-        self.lista_vendedores()   
+    
         
 
     def deleta_produto(self):
@@ -904,6 +931,7 @@ Complemento: {}'''.format(i[1],i[2],i[3],i[4],i[5],i[6],i[7],i[8]))
         self.desconto.insert(0,'0')
 
 #-----------------------Funções de relatórios---------------------------------------------------------------------
+
     def rel_mais_vendido(self):
         rel.mais_vendido()
         #subprocess.call(['swriter', 'relatorios/mais_vendido.txt']) #Relatorio no Linux com libreofice
@@ -1029,9 +1057,11 @@ Complemento: {}'''.format(i[1],i[2],i[3],i[4],i[5],i[6],i[7],i[8]))
 
     def ver_adm(self):
         if self.usuario != 'adm':
-            self.abas_pg0.destroy()
-            self.abas_pg3.destroy()
-            self.abas_pg4.destroy()
+            self.abas_pg0.destroy() # Esconde aba Cadastro
+            self.abas_pg4.destroy() # Esconde aba Relatórios
+            self.botao_alt_produto.destroy() # Esconde botão alterar do estoque
+            self.botao_add.destroy()# Esconde botão adicionar do estoque
+            self.botao_del_produto.destroy()# Esconde botão apagar do estoque
 
                  
 root = Tk()
