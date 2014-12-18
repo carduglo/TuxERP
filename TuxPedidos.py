@@ -879,7 +879,8 @@ Complemento: {}'''.format(i[1],i[2],i[3],i[4],i[5],i[6],i[7],i[8]))
     def somar_estoque(self):
         indice = self.ref_estoque.get()
         cur.execute("SELECT * FROM estoque WHERE ref = '%s'" %indice)
-        item = cur.fetchone()
+        item = self.arvore.selection()
+        item = self.arvore.item(item,'values')
         cor_soma = self.cor_soma.get()
         tamanho_soma = self.tamanho_soma.get()
         quantidade_soma = int(self.quantidade_soma.get())+int(item[4])
@@ -949,10 +950,7 @@ Complemento: {}'''.format(i[1],i[2],i[3],i[4],i[5],i[6],i[7],i[8]))
 
     
     def deleta_produto(self):
-        ref_del = self.ref_estoque.get()
-        cur.execute("DELETE FROM estoque WHERE ref=%s "%ref_del)
-        con.commit()
-        self.lista_estoque()
+        pass
 
     def zera_soma(self):
         self.cor_soma.delete(0, END)
