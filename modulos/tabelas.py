@@ -18,15 +18,10 @@ def cria_tabelas():
                  comp TEXT)""")
     #Criar tabela produtos
     cur.execute('''CREATE TABLE IF NOT EXISTS produtos (
-                 ref int primary key NOT NULL,
+                 ref TEXT primary key NOT NULL,
                  descricao TEXT NOT NULL,
                  precoV dec NOT NULL,
-                 precoA dec NOT NULL,
-                 pp INTEGER DEFAULT (0),
-                 p INTEGER DEFAULT (0),
-                 m INTEGER DEFAULT (0),
-                 g INTEGER DEFAULT (0),
-                 gg INTEGER DEFAULT (0))''')
+                 precoA dec NOT NULL)''')
 
     #Cria tabela do pedido
     cur.execute("""CREATE TABLE IF NOT EXISTS pedido (
@@ -64,4 +59,20 @@ def cria_tabelas():
     cur.execute(""" CREATE TABLE IF NOT EXISTS vendedores(
                 vendedor TEXT PRIMARY KEY,
                 senha TEXT)""")
-    #con.commit()
+
+    cur.execute("""CREATE TABLE IF NOT EXISTS estoque(
+                ref TEXT,
+                descricao TEXT,
+                cor TEXT,
+                tamanho TEXT,
+                quantidade INTEGER)""")
+
+    cur.execute("""CREATE TABLE IF NOT EXISTS entrada_estoque (
+                data DATE,
+                ref TEXT,
+                descricao TEXT,
+                pp INTEGER DEFAULT (0),
+                p INTEGER DEFAULT (0),
+                m INTEGER DEFAULT (0),
+                g INTEGER DEFAULT (0),
+                gg INTEGER DEFAULT (0))""")
