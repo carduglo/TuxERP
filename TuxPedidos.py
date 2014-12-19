@@ -128,14 +128,14 @@ class main:
 #-------------------------------------------Separador----------------------------------------------------------------------
         self.separador0 = Frame(self.abas_pg1, bd = 3, relief = SUNKEN, width = 2)        
 
-        self.label12 = Label(self.abas_pg1, text = u"PP/Único", font = ('Ariel','15'), fg = 'blue')
-        self.pp_quant = Entry(self.abas_pg1, width = 15, font = ('Ariel','15'))        
+        self.label12 = Label(self.abas_pg1, text = u"Quantidade", font = ('Ariel','15'), fg = 'blue')
+        self.quantidade_pedido = Entry(self.abas_pg1, width = 15, font = ('Ariel','15'))        
 
-        self.label13 = Label(self.abas_pg1, text = "P", font = ('Ariel','15'), fg = 'blue')
-        self.p_quant = Entry(self.abas_pg1, width = 15, font = ('Ariel','15'))        
+        self.label13 = Label(self.abas_pg1, text = "Tamanho", font = ('Ariel','15'), fg = 'blue')
+        self.tamanho_pedido = Entry(self.abas_pg1, width = 15, font = ('Ariel','15'))        
 
-        self.label14 = Label(self.abas_pg1, text = "M", font = ('Ariel','15'), fg = 'blue')
-        self.m_quant = Entry(self.abas_pg1, width = 15, font = ('Ariel','15'))        
+        self.label14 = Label(self.abas_pg1, text = "Cor", font = ('Ariel','15'), fg = 'blue')
+        self.cor_pedido = Entry(self.abas_pg1, width = 15, font = ('Ariel','15'))        
 
         self.label15 = Label(self.abas_pg1, text = "G", font = ('Ariel','15'), fg = 'blue')
         self.g_quant = Entry(self.abas_pg1, width = 15, font = ('Ariel','15'))        
@@ -175,6 +175,7 @@ class main:
         self.listbox = Listbox(self.abas_pg1, selectmode = 'single', font = ('Courier','15'), fg = "blue")        
         self.listbox.config(yscrollcommand = self.scrollbar.set)        
         self.scrollbar.config(command = self.listbox.yview)
+
 #-------------------------------Aba Clientes-------------------------------------------------------------------------
         self.frame1 = Frame(self.abas_pg2)
         self.frame1.configure(relief = GROOVE)
@@ -331,8 +332,6 @@ class main:
         self.label9.place(relx = 0.0, rely = 0.02)
         self.label10.place(relx = 0.0, rely = 0.135)
         self.label11.place(relx = 0.0, rely = 0.25)
-        self.label12.place(relx = 0.15, rely = 0.00)
-        self.label13.place(relx = 0.15, rely = 0.10)
         self.label14.place(relx = 0.15, rely = 0.20)
         self.label15.place(relx = 0.15, rely = 0.30)
         self.label16.place(relx = 0.15, rely = 0.40)
@@ -355,7 +354,6 @@ class main:
         self.label38.place(relx = 0.58, rely = 0.00)
         self.label39.place(relx = 0.58, rely = 0.15)
         
-
         #Cadastro place
         self.b_cadastra_vendedor.place(relx = 0.40, rely = 0.85, height = 100, width = 200)
         self.ref_c.place(relx = 0.00, rely = 0.17)
@@ -372,9 +370,11 @@ class main:
         self.venda_cliente.place(relx = 0.0, rely = 0.18)
         self.ref.place(relx = 0.0, rely = 0.30)
         self.separador0.place(relx = 0.14, rely = 0.0, relheight = 0.55)
-        self.pp_quant.place(relx = 0.15, rely = 0.04)
-        self.p_quant.place(relx = 0.15, rely = 0.14)
-        self.m_quant.place(relx = 0.15, rely = 0.24)
+        self.label12.place(relx = 0.15, rely = 0.00)
+        self.quantidade_pedido.place(relx = 0.15, rely = 0.04)
+        self.label13.place(relx = 0.15, rely = 0.10)
+        self.tamanho_pedido.place(relx = 0.15, rely = 0.14)
+        self.cor_pedido.place(relx = 0.15, rely = 0.24)
         self.g_quant.place(relx = 0.15, rely = 0.34)
         self.gg_quant.place(relx = 0.15, rely = 0.44)
         self.totalp.place(relx = 0.7, rely = 0.37)
@@ -446,29 +446,28 @@ class main:
         self.ver_adm()
         
 #===================================================Funções============================================================
-def imprimir(self):
+    def imprimir(self):
 
-        '''Função que imprime o pedido'''
+            '''Função que imprime o pedido'''
 
-        outfile = open('outfile.txt','w')
-        cabecalho = '''------------------------------------LINE FITNESS-------------------------------------
----------------------------E-mail: linefitness2014@gmail.com-------------------------
---------------------------------Fone: (47) 9682 6062---------------------------------'''
-        outfile.write(cabecalho+'\n\n\n')
-        tb=self.listbox.get(0,END)        
-        for i in tb: 
-            i=(u"{}\n" .format(i))
-            outfile.write(i.encode('utf-8'))
-        totalprint = "Total do Pedido:" + 57*'-'+ str(self.totalp.get())
-        outfile.write('\n\n'+totalprint)
-        outfile.close()
-        #subprocess.call(['notepad.exe','/p','outfile.txt'])*2 #versão notepad windows
-        #subprocess.call(['swriter','outfile.txt']) #Linux writer
-        self.diminui_estoque()
-        self.cadastra_venda()
-        self.cancela()
-        self.lista_estoque()
-
+            outfile = open('outfile.txt','w')
+            cabecalho = '''------------------------------------CAFE PARIS---------------------------------------
+    ---------------------------E-mail: --------------------------------------------------
+    --------------------------------Fone: (47) XXXX XXXX---------------------------------'''
+            outfile.write(cabecalho+'\n\n\n')
+            tb=self.listbox.get(0,END)        
+            for i in tb: 
+                i=(u"{}\n" .format(i))
+                outfile.write(i.encode('utf-8'))
+            totalprint = "Total do Pedido:" + 57*'-'+ str(self.totalp.get())
+            outfile.write('\n\n'+totalprint)
+            outfile.close()
+            #subprocess.call(['notepad.exe','/p','outfile.txt'])*2 #versão notepad windows
+            #subprocess.call(['swriter','outfile.txt']) #Linux writer
+            self.diminui_estoque()
+            self.cadastra_venda()
+            self.cancela()
+            self.lista_estoque()
 
 #--------------------------------------------------Funções de cadastro-------------------------------------------------                
     #Função Cadastra produto
@@ -507,14 +506,14 @@ def imprimir(self):
         self.precoa.delete(0, END)
 
     def cadastraclientes(self):
-        cliente=self.cliente.get()
-        endereco=self.endereco.get()
-        cidade=self.cidade.get()
-        cep=self.cep.get()
-        cpf=self.cpf.get()
-        fone=self.fone.get()
-        mail=self.mail.get()
-        comp=self.comp.get(0.0,END)
+        cliente = self.cliente.get()
+        endereco = self.endereco.get()
+        cidade = self.cidade.get()
+        cep = self.cep.get()
+        cpf = self.cpf.get()
+        fone = self.fone.get()
+        mail = self.mail.get()
+        comp = self.comp.get(0.0, END)
         if cliente == '':
             tkMessageBox.showwarning('Aviso!',u'Você precisa preencher o campo cliente')
         elif endereco == '':
@@ -525,7 +524,7 @@ def imprimir(self):
             tkMessageBox.showwarning('Aviso!',u'Você precisa preencher o campo telefone')
         else:
             cur.execute("INSERT INTO clientes VALUES(?,?,?,?,?,?,?,?,?)",
-                        (None,cliente,endereco,cidade,cep,cpf,fone,mail,comp))
+                        (None, cliente, endereco, cidade, cep, cpf, fone, mail, comp))
             con.commit()
             self.limpaclientes()
             tkMessageBox.showinfo('Aviso!',u'Cliente cadastrado com sucesso')
@@ -572,43 +571,44 @@ def imprimir(self):
     def pedido(self):      
         ref = self.ref.get() #Pega o valor da referencia digitado
         cliente = self.venda_cliente.get() # Entrada do cliente
-        if ref == '': # Checa se campo referência está preenchido
+
+        if ref == '': #Checa se campo referência está preenchido
             tkMessageBox.showwarning('Aviso!',u'Você precisa preencher o campo referência')
         else:
-            pp = float(self.pp_quant.get())
-            p = float(self.p_quant.get())
-            m = float(self.m_quant.get())
-            g = float(self.g_quant.get())
-            gg =float(self.gg_quant.get()) 
-            quant = pp+p+m+g+gg #Soma da quantidade de peças por tamanho
+            quant = float(self.quantidade_pedido.get())
+            cor = self.cor_pedido.get()
+            tamanho = self.tamanho_pedido.get()
             cur.execute("SELECT * FROM produtos WHERE ref = %s" %ref) #Consulta pela referencia
             item = cur.fetchone()
             desc = item[1]
             preco = float(item[2])
             precoa = float(item[3])
+            
             v = self.escolha.get()
             if v == 1:
                 precof = preco
             else:
                 precof = precoa
+
             desconto = float(self.desconto.get())
-            total = quant*precof #Calcula preço total
-            desconto = total*desconto/100.00#Calculo do desconto em porcentagem
-            total = total-desconto #Aplica desconto
+            total = quant * precof #Calcula preço total
+            desconto = total * desconto / 100.00 #Calculo do desconto em porcentagem
+            total = total - desconto #Aplica desconto
+            
             vendedor = self.vendedor.get()
             if vendedor == '': # Checa se campo vendedor está preenchido
                 tkMessageBox.showwarning('Aviso!',u'Você precisa preencher o campo vendedor')
             else:
-                cur.execute("INSERT INTO pedido VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)",
-                            (None,ref,quant,desc,precof,total,pp,p,m,g,gg,vendedor,cliente)) # Insere dados na table pedido
+                cur.execute("INSERT INTO pedido VALUES(?,?,?,?,?,?,?,?,?,?)", (None, ref, quant, desc, precof, total, cor, tamanho, vendedor, cliente)) # Insere dados na table pedido
                 con.commit() #Insere dados na tabela pedido
-                tb=cur.execute("SELECT * FROM pedido") #Pesquisa tudo na tabela pedido
-                self.listbox.delete(0,END) #Limpa a listbox
+
+                tb = cur.execute("SELECT * FROM pedido") #Pesquisa tudo na tabela pedido
+                self.listbox.delete(0, END) #Limpa a listbox
                 #Insere os dados na lista
-                self.listbox.insert(END,"Ref         Qtd                    Descricao                    Unit        Total")
+                #self.listbox.insert(END,"Ref         Qtd                 Descricao                    Unit        Total")
                 tb = list(tb)
                 for i in tb: 
-                    self.listbox.insert(END,u"{:.<9}{:.^10}{:.^43}{:.^8.2f}{:.>12.2f}" .format(i[1],i[2],i[3],i[4],i[5]))#Insere dados na listbox
+                    self.listbox.insert(END, u"{:.<8}{:.^8}{:.^25}{:.^8}{:.^4}{:.^8.2f}{:.>8.2f}" .format(i[1], i[2], i[3], i[6], i[7], i[4], i[5]))#Insere dados na listbox
                     self.listbox.select_clear(self.listbox.size() - 2)
                     self.listbox.select_set(END)
                     self.listbox.yview(END)
@@ -617,8 +617,8 @@ def imprimir(self):
                     self.totalp.delete(0,END) #Limpa Total
                     self.totalp.insert(END,"R$:%.2f"%totalp)#Insere total
                 self.zera_pedido()
-                
-        
+                self.zera_desconto()
+           
 
     def cancela(self):
 
@@ -645,19 +645,13 @@ def imprimir(self):
         con.commit()
 
     def zera_pedido(self):
-        self.pp_quant.delete(0,END)
-        self.p_quant.delete(0,END)
-        self.m_quant.delete(0,END)
-        self.g_quant.delete(0,END)
-        self.gg_quant.delete(0,END)
-        self.pp_quant.insert(0,'0')
-        self.p_quant.insert(0,'0')
-        self.m_quant.insert(0,'0')
-        self.g_quant.insert(0,'0')
-        self.gg_quant.insert(0,'0')
+        self.quantidade_pedido.delete(0, END)
+        self.tamanho_pedido.delete(0, END)
+        self.cor_pedido.delete(0, END)
+
     def zera_desconto(self):
-        self.desconto.delete(0,END)
-        self.desconto.insert(0,'0')
+        self.desconto.delete(0, END)
+        self.desconto.insert(0, '0')
 
 #-------------------------------Consulta de clientes---------------------------------------------------        
 
@@ -673,22 +667,15 @@ def imprimir(self):
         self.limpaclientes()
         consulta = cur.execute("SELECT * FROM clientes WHERE cl = '%s'" %self.consulta.get())
         for i in consulta:
-            self.mostra1.insert(END,u'''Cliente: {}
-End: {}
-Cidade: {}
-CEP: {}
-CPF: {}
-Fone: {}
-E-mail: {}
-Complemento: {}'''.format(i[1],i[2],i[3],i[4],i[5],i[6],i[7],i[8]))
-        self.cliente.insert(END,i[1])
-        self.endereco.insert(END,i[2])
-        self.cidade.insert(END,i[3])
-        self.cep.insert(END,i[4])
-        self.cpf.insert(END,i[5])
-        self.fone.insert(END,i[6])
-        self.mail.insert(END,i[7])
-        self.comp.insert(END,i[8])
+            self.mostra1.insert(END, u'''Cliente: {}\nEnd: {}\nCidade: {}\nCEP: {}\nCPF: {}\nFone: {}\nE-mail: {}\nComplemento: {}'''.format(i[1],i[2],i[3],i[4],i[5],i[6],i[7],i[8]))
+        self.cliente.insert(END, i[1])
+        self.endereco.insert(END, i[2])
+        self.cidade.insert(END, i[3])
+        self.cep.insert(END, i[4])
+        self.cpf.insert(END, i[5])
+        self.fone.insert(END, i[6])
+        self.mail.insert(END, i[7])
+        self.comp.insert(END, i[8])
 
     def alt_cliente(self):
         i = self.consulta.get()

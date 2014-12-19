@@ -31,11 +31,8 @@ def cria_tabelas():
                  descricao TEXT NOT NULL,
                  preco DEC NOT NULL,
                  total DEC NOT NULL,
-                 pp INTEGER DEFAULT (0),
-                 p INTEGER DEFAULT (0),
-                 m INTEGER DEFAULT (0),
-                 g INTEGER DEFAULT (0),
-                 gg INTEGER DEFAULT (0),
+                 cor TEXT NOT NULL,
+                 tamanho TEXT NOT NULL,
                  vendedor TEXT NOT NULL,
                  cliente TEXT NOT NULL)""")
     
