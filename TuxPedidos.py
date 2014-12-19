@@ -241,27 +241,7 @@ class main:
 #----------------------------------------------------ABA ESTOQUE-------------------------------------------------------
         self.frame4 = Frame(self.abas_pg3)
         
-        
-        self.label28 = Label(self.frame4, text = u"PP/Único", font = ('Ariel','15'))
-        self.pp_estoque=Entry(self.frame4, width = 15, font = ('Ariel','15'))
-        
-
-        self.label29 = Label(self.frame4, text = "P", font = ('Ariel','15'))
-        self.p_estoque=Entry(self.frame4, width = 15, font = ('Ariel','15'))
-        
-
-        self.label30 = Label(self.frame4, text = "M",font = ('Ariel','15'))
-        self.m_estoque=Entry(self.frame4, width = 15, font = ('Ariel','15'))
-        
-
-        self.label31 = Label(self.frame4, text = "G", font = ('Ariel','15'))
-        self.g_estoque=Entry(self.frame4, width = 15, font = ('Ariel','15'))
-        
-
-        self.label32 = Label(self.frame4, text = "GG", font = ('Ariel','15'))
-        self.gg_estoque=Entry(self.frame4, width = 15, font = ('Ariel','15'))        
-        
-                
+                       
         #Cabeçalho da lista
         self.dataCols = (u'Referência', u'Descrição', u'Cor', u'Tamanho', 'Quantidade')
         self.arvore = ttk.Treeview(self.frame4, columns = self.dataCols, show = 'headings')
@@ -274,10 +254,6 @@ class main:
         self.arvore.config(yscrollcommand = self.rolagemy.set)
         self.rolagemy.config(command = self.arvore.yview)
 
-        self.botao_alt_produto = Button(self.frame4, text = 'Alterar', font = ('Arial','18'), command = self.alterar_produto)
-        
-        self.botao_limpa_produto = Button(self.frame4, text = 'Limpar', font = ('Arial','18'), command = self.limpa_estoque)
-        
 #-------------------------------------------Separador----------------------------------------------------------------------
         self.separador = Frame(self.frame4, bd = 3, relief = SUNKEN, width = 2)
         
@@ -293,14 +269,6 @@ class main:
         self.label35 = Label(self.frame4, text = "Quantidade", font = ('Ariel','15'))
         self.quantidade_soma = Entry(self.frame4, width = 15, font = ('Ariel','15'))
         
-
-        self.label36 = Label(self.frame4, text = "G", font = ('Ariel','15')) # Apagar depois
-        self.g_soma = Entry(self.frame4, width = 15, font = ('Ariel','15'))
-        
-
-        self.label37 = Label(self.frame4, text = "GG", font = ('Ariel','15'))# Apagar depois
-        self.gg_soma = Entry(self.frame4, width = 15, font = ('Ariel','15'))
-
         self.botao_add = Button(self.frame4, text = 'Adicionar', font = ('Arial','18'),
                                 command = self.somar_estoque)
         
@@ -440,20 +408,7 @@ class main:
         #Estoque pplace
         self.frame4.place(relx = 0.0, rely = 0.00, relheight = 1.0, relwidth = 1.0)
         
-        self.label28.place(relx = 0.0, rely = 0.10)
-        self.pp_estoque.place(relx = 0.0, rely = 0.14, relwidth = 0.10)
-        self.label29.place(relx = 0.0, rely = 0.20)
-        self.p_estoque.place(relx = 0.0, rely = 0.24, relwidth = 0.10)
-        self.label30.place(relx = 0.0, rely = 0.30)
-        self.m_estoque.place(relx = 0.0, rely = 0.34, relwidth = 0.10)
-        self.label31.place(relx = 0.0, rely = 0.40)
-        self.g_estoque.place(relx = 0.0, rely = 0.44, relwidth = 0.10)
-        self.label32.place(relx = 0.0, rely = 0.50)
-        self.gg_estoque.place(relx = 0.0, rely = 0.54, relwidth = 0.10)
-
-        self.botao_alt_produto.place(relx = 0.15, rely = 0.63)
-        self.botao_limpa_produto.place(relx = 0.0, rely = 0.63)
-
+        
         self.separador.place(relx = 0.27, rely = 0.0, relheight = 0.70)
 
         self.label33.place(relx = 0.28, rely = 0.10)
@@ -462,10 +417,7 @@ class main:
         self.tamanho_soma.place(relx = 0.28, rely = 0.24, relwidth = 0.10)
         self.label35.place(relx = 0.28, rely = 0.30)
         self.quantidade_soma.place(relx = 0.28, rely = 0.34, relwidth = 0.10)
-        #self.label36.place(relx = 0.28, rely = 0.40)
-        #self.g_soma.place(relx = 0.28, rely = 0.44, relwidth = 0.10)
-        #self.label37.place(relx = 0.28, rely = 0.50)
-        #self.gg_soma.place(relx = 0.28, rely = 0.54, relwidth = 0.10)
+        
 
         self.botao_add.place(relx = 0.28, rely = 0.63)
         self.ref_estoque.place(relx = 0.58, rely = 0.07)
@@ -486,14 +438,36 @@ class main:
         self.relb5.place(relx = 0.01, rely = 0.40, relwidth = 0.25)
 
         #funções diversas
-        self.lista_estoque()
+        #self.lista_estoque()
         self.lista_clientes()
-        self.zera_soma()
+        #self.zera_soma() Tava dando bug com o login
         self.zera_pedido()
         self.zera_desconto()
         self.ver_adm()
         
 #===================================================Funções============================================================
+def imprimir(self):
+
+        '''Função que imprime o pedido'''
+
+        outfile = open('outfile.txt','w')
+        cabecalho = '''------------------------------------LINE FITNESS-------------------------------------
+---------------------------E-mail: linefitness2014@gmail.com-------------------------
+--------------------------------Fone: (47) 9682 6062---------------------------------'''
+        outfile.write(cabecalho+'\n\n\n')
+        tb=self.listbox.get(0,END)        
+        for i in tb: 
+            i=(u"{}\n" .format(i))
+            outfile.write(i.encode('utf-8'))
+        totalprint = "Total do Pedido:" + 57*'-'+ str(self.totalp.get())
+        outfile.write('\n\n'+totalprint)
+        outfile.close()
+        #subprocess.call(['notepad.exe','/p','outfile.txt'])*2 #versão notepad windows
+        #subprocess.call(['swriter','outfile.txt']) #Linux writer
+        self.diminui_estoque()
+        self.cadastra_venda()
+        self.cancela()
+        self.lista_estoque()
 
 
 #--------------------------------------------------Funções de cadastro-------------------------------------------------                
@@ -522,7 +496,6 @@ class main:
             except:
                 tkMessageBox.showinfo('Aviso!', u'Referência já existente, ou valor inválido')
             con.commit()
-            self.lista_estoque()
             self.lista_referencia()
                         
 
@@ -658,35 +631,11 @@ class main:
         self.zera_desconto()
         con.commit()
     
-    def imprimir(self):
-
-        '''Função que imprime o pedido'''
-
-        outfile = open('outfile.txt','w')
-        cabecalho = '''------------------------------------LINE FITNESS-------------------------------------
----------------------------E-mail: linefitness2014@gmail.com-------------------------
---------------------------------Fone: (47) 9682 6062---------------------------------'''
-        outfile.write(cabecalho+'\n\n\n')
-        tb=self.listbox.get(0,END)        
-        for i in tb: 
-            i=(u"{}\n" .format(i))
-            outfile.write(i.encode('utf-8'))
-        totalprint = "Total do Pedido:" + 57*'-'+ str(self.totalp.get())
-        outfile.write('\n\n'+totalprint)
-        outfile.close()
-        #subprocess.call(['notepad.exe','/p','outfile.txt'])*2 #versão notepad windows
-        #subprocess.call(['swriter','outfile.txt']) #Linux writer
-        self.diminui_estoque()
-        self.cadastra_venda()
-        self.cancela()
-        self.lista_estoque()
-
     def cadastra_venda(self):
 
         ''' Adiciona a venda no banco de dados, para relatórios futuros'''
 
         hoje = date.today()
-        #hoje = hoje.strftime('%d/%m/%Y')
         cur.execute("SELECT * FROM pedido")
         pedido=cur.fetchall()
         for i in pedido:
@@ -796,16 +745,16 @@ Complemento: {}'''.format(i[1],i[2],i[3],i[4],i[5],i[6],i[7],i[8]))
         self.consulta_ref.set_completion_list(self.col)
         self.consulta_ref.bind("<<ComboboxSelected>>", self.consulta_referencia)
         self.consulta_ref.bind("<Return>", self.consulta_referencia)
-        self.consulta_ref.bind("<KP_Enter>", self.mostraclientes)
+        self.consulta_ref.bind("<KP_Enter>", self.consulta_referencia)
         self.consulta_ref.place(relx = 0.58, rely = 0.20)
 
 
     def consulta_referencia(self,event):
         self.ref_estoque.delete(0,END)
         desc_pesq = self.consulta_ref.get()
-        cur.execute('SELECT ref FROM produtos WHERE descricao = "%s"' %desc_pesq)
+        cur.execute('SELECT ref FROM estoque WHERE descricao = "%s"' %desc_pesq)
         item = cur.fetchone()
-        self.ref_estoque.insert(END,item)
+        self.ref_estoque.insert(END, item)
         self.pesquisa_referencia()
 
     def pesquisa_referencia_bind(self, event):
@@ -817,19 +766,23 @@ Complemento: {}'''.format(i[1],i[2],i[3],i[4],i[5],i[6],i[7],i[8]))
             cur.execute("SELECT * FROM estoque WHERE ref = '%s'" %ref_pesq)
             item = cur.fetchone()
             self.limpa_estoque2() # Limpa os campos, menos referencia
-            self.cor_soma.insert(END, item[2])
-            self.tamanho_soma.insert(END, item[3])
             self.consulta_ref.insert(END,item[1]) #insere descrição na combobox      
             self.lista_estoque()
         except:
             tkMessageBox.showinfo('Aviso!',u'Referência inválida')
 
+
     def lista_estoque(self):
         #Limpar lista
         for i in self.arvore.get_children():
             self.arvore.delete(i)
+        
         #Consulta BD e preenche a lista    
-        dados=cur.execute('SELECT ref,descricao,cor,tamanho,quantidade FROM estoque ORDER BY ref')
+        dados=cur.execute("""SELECT *
+            FROM estoque
+            WHERE ref = ?
+            ORDER BY ref""",
+            self.ref_estoque.get())
         for item in dados:
             self.arvore.insert('','end',values=item)
         self.arvore.bind('<<TreeviewSelect>>',self.itemselect)
@@ -858,24 +811,6 @@ Complemento: {}'''.format(i[1],i[2],i[3],i[4],i[5],i[6],i[7],i[8]))
         self.tamanho_soma.delete(0, END)
         self.consulta_ref.delete(0, END)
         
-    def alterar_produto(self):
-        indice = self.ref_estoque.get()
-        pp_novo = self.pp_estoque.get()
-        p_novo = self.p_estoque.get()
-        m_novo = self.m_estoque.get()
-        g_novo = self.g_estoque.get()
-        gg_novo = self.gg_estoque.get()
-        cur.execute('''UPDATE produtos SET pp = ?,
-                    p = ?,
-                    m = ?,
-                    g = ?,
-                    gg = ?
-                    WHERE ref = ?''',
-                    (pp_novo,p_novo,m_novo,g_novo,gg_novo,indice))
-        con.commit()
-        self.lista_estoque()
-
-           
     def somar_estoque(self):
         indice = self.ref_estoque.get()
         cur.execute("SELECT * FROM estoque WHERE ref = '%s'" %indice)
@@ -891,14 +826,26 @@ Complemento: {}'''.format(i[1],i[2],i[3],i[4],i[5],i[6],i[7],i[8]))
                         WHERE ref = ?
                         AND cor = ?
                         AND tamanho = ?''',
-                        (quantidade_soma, indice, cor_soma, tamanho_soma))
+                        (quantidade_soma, item[0], cor_soma, tamanho_soma))
+
+        elif item[2] == '-' and item[3] == '-':
+            cur.execute('''UPDATE estoque SET 
+                        quantidade = ?,
+                        cor = ?,
+                        tamanho = ?
+                        WHERE ref = ?
+                        AND cor = ?
+                        AND tamanho = ?''',
+                        (quantidade_soma, cor_soma, tamanho_soma,
+                         item[0], '-', '-'))
+
         else:
             cur.execute(""" INSERT INTO estoque VALUES (?, ?, ?, ?, ?) """,
                 (indice, item[1], cor_soma, tamanho_soma,
                  int(self.quantidade_soma.get())))
 
         con.commit()
-        #self.entrada_estoque()
+        self.entrada_estoque()
         self.lista_estoque()
         self.zera_soma()
 
@@ -910,16 +857,13 @@ Complemento: {}'''.format(i[1],i[2],i[3],i[4],i[5],i[6],i[7],i[8]))
         data = date.today()
         referencia = self.ref_estoque.get()
         descricao = self.consulta_ref.get()
-        pp = int(self.cor_soma.get())
-        p  = int(self.tamanho_soma.get())
-        m  = int(self.quantidade_soma.get())
-        g  = int(self.g_soma.get())
-        gg = int(self.gg_soma.get())
-        cur.execute("INSERT INTO entrada_estoque VALUES(?,?,?,?,?,?,?,?)",
-            (data, referencia, descricao, pp, p, m, g, gg))
+        cor = self.cor_soma.get()
+        tamanho = self.tamanho_soma.get()
+        quantidade = int(self.quantidade_soma.get())
+        cur.execute("INSERT INTO entrada_estoque VALUES(?,?,?,?,?,?)",
+            (data, referencia, descricao, cor, tamanho, quantidade))
         con.commit()
-
-
+#----------------------------------------------------------------------------------------------------------------
     def diminui_estoque(self):
         cur.execute('''UPDATE produtos SET pp =
                    (SELECT produtos.pp-pedido.pp FROM pedido
@@ -956,14 +900,10 @@ Complemento: {}'''.format(i[1],i[2],i[3],i[4],i[5],i[6],i[7],i[8]))
         self.cor_soma.delete(0, END)
         self.tamanho_soma.delete(0, END)
         self.quantidade_soma.delete(0, END)
-        self.g_soma.delete(0, END)
-        self.gg_soma.delete(0, END)
         self.cor_soma.insert(0,'0')
         self.tamanho_soma.insert(0,'0')
         self.quantidade_soma.insert(0,'0')
-        self.g_soma.insert(0,'0')
-        self.gg_soma.insert(0,'0')
-
+        
     def imprime_estoque(self):
 
         '''Função que imprime o estoque'''

@@ -71,8 +71,6 @@ def cria_tabelas():
                 data DATE,
                 ref TEXT,
                 descricao TEXT,
-                pp INTEGER DEFAULT (0),
-                p INTEGER DEFAULT (0),
-                m INTEGER DEFAULT (0),
-                g INTEGER DEFAULT (0),
-                gg INTEGER DEFAULT (0))""")
+                cor TEXT,
+                tamanho TEXT,
+                quantidade INTEGER )""")
